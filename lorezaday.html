@@ -1,247 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>GPS Day Celebration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-image: linear-gradient(to left, #2fb509, #65b300, #88b000, #a4ad00, #bca900, #d09400, #df7c0c, #ea6228, #e42049, #c9006c, #92008d, #181ea4);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God's Prayer Squad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 100px;
+        }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* --- Fixed Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a237e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100;
+        }
 
-    header {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 20px;
-    }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
+        header .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 25px;
+            transition: transform 0.3s ease;
+        }
 
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
-    }
+        header .logo-container img:hover {
+            transform: scale(1.1);
+        }
 
-    section {
-      padding: 30px;
-    }
+        header .logo-container .logo-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffb74d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-    .event-details {
-      max-width: 100%;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+        /* --- New Body Content Styling --- */
+        .loreza-section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background-color: #212121;
+            color: #f0f4f8;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
 
-    .buttons {
-      margin: 20px 0;
-    }
+        .loreza-section h2 {
+            font-size: 3em;
+            color: #ffb74d;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-    .buttons button {
-      background: #004080;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+        .loreza-section p {
+            font-size: 1.1em;
+            color: #b0bec5;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+        }
 
-    .buttons button:hover {
-      background: #0066cc;
-    }
+        .journey-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
 
-    .gallery {
-      margin-top: 30px;
-      overflow: hidden;
-      position: relative;
-      height: 220px;
-    }
+        .journey-step {
+            background-color: #37474f;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .journey-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .journey-step h3 {
+            color: #ffb74d;
+            font-size: 1.8em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .journey-step p {
+            color: #e0e0e0;
+            font-size: 1em;
+            margin: 0;
+        }
 
-    .gallery-track {
-      display: flex;
-      width: calc(300px * 6);
-      animation: scroll 20s linear infinite;
-      animation-play-state: running;
-    }
+        .journey-icon {
+            font-size: 4em;
+            color: #ffb74d;
+            margin-bottom: 1rem;
+        }
 
-    .gallery img {
-      width: 300px;
-      height: 200px;
-      margin: 10px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+        .image-card {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
 
-    footer {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 15px;
-      margin-top: 40px;
-    }
+        .image-card:hover {
+            transform: scale(1.05);
+        }
 
-    /* Popup modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-    }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    .modal-content {
-      background: white;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 500px;
-      text-align: left;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: fadeIn 0.5s ease;
-    }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(25, 118, 210, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+        .image-card:hover .image-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    .modal-content h2 {
-      margin-top: 0;
-      color: #004080;
-    }
+        .image-overlay h4 {
+            font-size: 1.5em;
+            margin: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
 
-    .close-btn {
-      float: right;
-      font-size: 1.5em;
-      font-weight: bold;
-      cursor: pointer;
-      color: #444;
-    }
+        .image-overlay p {
+            font-size: 1em;
+            margin: 0;
+        }
 
-    .close-btn:hover {
-      color: red;
-    }
-  </style>
+
+        /* Footer styling */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+            gap: 1px;
+        }
+
+        footer a {
+            color: #ffb74d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffd54f;
+            text-decoration: underline;
+        }
+
+        .logo-container img {
+            border-radius: 30%;
+            height: 30px;
+            width: 30px;
+            background-color: white;
+        }
+        
+    </style>
 </head>
+
 <body>
-
-  <header>
-    <h1>Charity Day Outreach</h1>
-    <p>Honoring the foundation of our organization</p>
-  </header>
-
-  <section>
-    <div class="event-details">
-      <!-- Buttons -->
-      <div class="buttons">
-        <button onclick="window.location.href='loreza past.html'">Past Events</button>
-        <button onclick="openModal()">Latest Update</button>
-      </div>
-
-      <h2>About the Event</h2>
-      <p>
-        GPS Day is a special occasion to remember the day our organization was formed. 
-        It celebrates our journey, achievements, and the people who made it possible. 
-        Every year, we come together to reflect on our past, celebrate the present, 
-        and look forward to a brighter future.
-      </p>
-
-      <h2>Event Highlights</h2>
-      <ul style="text-align:left; max-width:600px; margin:auto;">
-        <li>Cultural performances</li>
-        <li>Guest speeches and honors</li>
-        <li>Team awards and recognitions</li>
-        <li>Fun activities and games</li>
-        <li>Community dinner</li>
-      </ul>
-
-      <!-- Moving Image Gallery -->
-      <div class="gallery">
-        <div class="gallery-track" id="galleryTrack">
-          <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\charity2.jpg" alt="Event Photo 1">
-          <img src="https://picsum.photos/id/1016/300/200" alt="Event Photo 2">
-          <img src="https://picsum.photos/id/1025/300/200" alt="Event Photo 3">
-          <img src="https://picsum.photos/id/1035/300/200" alt="Event Photo 4">
-          <img src="https://picsum.photos/id/1040/300/200" alt="Event Photo 5">
-          <img src="https://picsum.photos/id/1050/300/200" alt="Event Photo 6">
+    <header>
+        <div class="logo-container">
+            <img src="https://placehold.co/50x50/1a237e/ffffff?text=GPS" alt="God's Prayer Squad Logo">
+            <div class="logo-text">God's Prayer Squad</div>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
+    
+    <!-- New Content Section for Loreza Day -->
+    <main class="loreza-section">
+        <h2>Loreza Day: The Summit of Prayer</h2>
+        <p>
+            Loreza Day is more than just a mountain climb; it's a spiritual pilgrimage. As God's Prayer Squad, we ascend the mountain to disconnect from the world and connect with our faith in a profound way. The journey is challenging, but every step brings us closer to a place of solitude and reflection, where the noise of daily life fades away.
+        </p>
+        <p>
+            Our ultimate goal is to reach the summit by sunset, where we spend the night in dedicated prayer and worship. The cool mountain air, the vast expanse of the night sky, and the silence of nature create a powerful sanctuary for communion with God. This overnight prayer session is the heart of Loreza Day, renewing our spirits and strengthening our bond as a community of faith.
+        </p>
 
-  <!-- Popup Modal -->
-  <div id="updateModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>Latest Update</h2>
-      <p>
-        📢 Exciting news! This year's GPS Day will feature a **special guest speaker**, 
-        an extended cultural program, and the launch of our new community initiative.  
-        Stay tuned for more details coming soon!
-      </p>
-    </div>
-  </div>
+        <h2>The Journey</h2>
+        <div class="journey-grid">
+            <div class="journey-step">
+                <div class="journey-icon">🏔️</div>
+                <h3>The Ascent</h3>
+                <p>We begin our climb in the early afternoon, preparing for the physical and spiritual challenge ahead.</p>
+            </div>
+            <div class="journey-step">
+                <div class="journey-icon">🌌</div>
+                <h3>After reaching</h3>
+                <p> We settle in for a night of deep, meaningful prayer, surrounded by the beauty of creation.</p>
+            </div>
+            <div class="journey-step">
+                <div class="journey-icon">🌅</div>
+                <h3>Sunrise Dedication</h3>
+                <p>We conclude our pilgrimage with a morning prayer, dedicating ourselves and our community.</p>
+            </div>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 GPS Organization. All Rights Reserved.</p>
-  </footer>
+        <section class="gallery-section">
+        <h2 style="margin-top: 0; color: #ffb74d;">Moments of Reflection</h2>
+        <div class="gallery-grid">
+            <div class="image-card">
+                <img src="https://placehold.co/300x200/212121/ffb74d?text=Mountain+Climb" alt="Volunteers working together">
+                <div class="image-overlay">
+                    <h4>The Climb</h4>
+                    <p>The journey to the top is a test of faith and endurance.</p>
+                </div>
+            </div>
 
-  <script>
-    // Modal control
-    function openModal() {
-      document.getElementById("updateModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("updateModal").style.display = "none";
-    }
-    window.onclick = function(event) {
-      if (event.target == document.getElementById("updateModal")) {
-        closeModal();
-      }
-    }
+            <div class="image-card">
+                <img src="https://placehold.co/300x200/212121/ffb74d?text=Overnight+Prayer" alt="Donated goods">
+                <div class="image-overlay">
+                    <h4>Overnight Prayer</h4>
+                    <p>A serene moment of communion with God under the stars.</p>
+                </div>
+            </div>
 
-    // Gallery pause/resume
-    const gallery = document.getElementById("galleryTrack");
+            <div class="image-card">
+                <img src="https://placehold.co/300x200/212121/ffb74d?text=Sunrise+View" alt="Health clinic">
+                <div class="image-overlay">
+                    <h4>Sunrise View</h4>
+                    <p>Waking up to a breathtaking sunrise, a symbol of new beginnings.</p>
+                </div>
+            </div>
 
-    gallery.addEventListener("mouseenter", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("mouseleave", () => {
-      gallery.style.animationPlayState = "running";
-    });
-    gallery.addEventListener("touchstart", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("touchend", () => {
-      gallery.style.animationPlayState = "running";
-    });
-  </script>
+            <div class="image-card">
+                <img src="https://placehold.co/300x200/212121/ffb74d?text=Community+Prayer" alt="People smiling">
+                <div class="image-overlay">
+                    <h4>Community Prayer</h4>
+                    <p>United in faith, lifting our voices as one.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <footer>
+        &copy; 2025 Designed by Alhan<br>
+        <a href="tel:+255699889376">+255699889376</a> / <a href="tel:+255750589376">+255750589376</a><br>
+        <a href="mailto:alhanh52@gmail.com">alhanh52@gmail.com</a><br>
+        All rights are reserved!!
+    </footer>
 
 </body>
+
 </html>
