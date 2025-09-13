@@ -1,247 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>GPS Day Celebration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-image: linear-gradient(to left, #2fb509, #65b300, #88b000, #a4ad00, #bca900, #d09400, #df7c0c, #ea6228, #e42049, #c9006c, #92008d, #181ea4);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    header {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 20px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
-    }
-
-    section {
-      padding: 30px;
-    }
-
-    .event-details {
-      max-width: 100%;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
-    .buttons {
-      margin: 20px 0;
-    }
-
-    .buttons button {
-      background: #004080;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .buttons button:hover {
-      background: #0066cc;
-    }
-
-    .gallery {
-      margin-top: 30px;
-      overflow: hidden;
-      position: relative;
-      height: 220px;
-    }
-
-    .gallery-track {
-      display: flex;
-      width: calc(300px * 6);
-      animation: scroll 20s linear infinite;
-      animation-play-state: running;
-    }
-
-    .gallery img {
-      width: 300px;
-      height: 200px;
-      margin: 10px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    footer {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 15px;
-      margin-top: 40px;
-    }
-
-    /* Popup modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-    }
-
-    .modal-content {
-      background: white;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 500px;
-      text-align: left;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: fadeIn 0.5s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .modal-content h2 {
-      margin-top: 0;
-      color: #004080;
-    }
-
-    .close-btn {
-      float: right;
-      font-size: 1.5em;
-      font-weight: bold;
-      cursor: pointer;
-      color: #444;
-    }
-
-    .close-btn:hover {
-      color: red;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God's Prayer Squad Day</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f3e8ff, #e0e7ff);
+            background-attachment: fixed;
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .animate-fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased text-gray-800">
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8">
+        <!-- Main content container -->
+        <div class="card shadow-2xl rounded-3xl p-6 sm:p-12 max-w-5xl w-full">
+            <!-- Header Section -->
+            <header class="text-center mb-10">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-indigo-900 mb-2">
+                    God's Prayer Squad Day<br>
+                    <p>Gps Day</p>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-600">
+                    A Day of Cerabration, Happy, and Unity
+                </p>
+            </header>
 
-  <header>
-    <h1>GPS Day Celebration</h1>
-    <p>Honoring the foundation of our organization</p>
-  </header>
+            <!-- About Section -->
+            <section class="mb-10 text-center">
+                <div class="mb-6 flex justify-center">
+                    <i class="fas fa-praying-hands text-6xl text-indigo-600 animate-pulse"></i>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+                    About the Event
+                </h2>
+                <p class="text-gray-700 leading-relaxed text-base sm:text-lg max-w-prose mx-auto">
+                    God's Prayer Squad (GPS) Day is an annual event where our community comes together to strengthen our faith through collective Eating,Drinking and Dancing together. It's a day dedicated to spiritual reflection, sharing testimonies, and lifting our voices in unity. We believe in the power of prayer to transform lives and communities, and this day serves as a powerful reminder of that.<br>
+                    Also this day new coordinators of GPS will be Announced
+                </p>
+            </section>
 
-  <section>
-    <div class="event-details">
-      <!-- Buttons -->
-      <div class="buttons">
-        <button onclick="window.location.href='gpsday past events.html'">Past Events</button>
-        <button onclick="openModal()">Latest Update</button>
-      </div>
-
-      <h2>About the Event</h2>
-      <p>
-        GPS Day is a special occasion to remember the day our organization was formed. 
-        It celebrates our journey, achievements, and the people who made it possible. 
-        Every year, we come together to reflect on our past, celebrate the present, 
-        and look forward to a brighter future.
-      </p>
-
-      <h2>Event Highlights</h2>
-      <ul style="text-align:left; max-width:600px; margin:auto;">
-        <li>Cultural performances</li>
-        <li>Guest speeches and honors</li>
-        <li>Team awards and recognitions</li>
-        <li>Fun activities and games</li>
-        <li>Community dinner</li>
-      </ul>
-
-      <!-- Moving Image Gallery -->
-      <div class="gallery">
-        <div class="gallery-track" id="galleryTrack">
-          <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\charity2.jpg" alt="Event Photo 1">
-          <img src="https://picsum.photos/id/1016/300/200" alt="Event Photo 2">
-          <img src="https://picsum.photos/id/1025/300/200" alt="Event Photo 3">
-          <img src="https://picsum.photos/id/1035/300/200" alt="Event Photo 4">
-          <img src="https://picsum.photos/id/1040/300/200" alt="Event Photo 5">
-          <img src="https://picsum.photos/id/1050/300/200" alt="Event Photo 6">
+            <!-- Event Gallery Section -->
+            <section class="mb-10">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+                    <button id="updates-button" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:-translate-y-1">
+                        Latest Updates
+                    </button>
+                    <button id="learn-more-button" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:-translate-y-1">
+                        Get Alert
+                    </button>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 border-b-4 border-indigo-400 pb-2 text-center">
+                    Some of Our Gps Day Images
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Image 1 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="charity.jpg" alt="A group of people engaged in a focused prayer session." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="charity1.jpg" alt="A person sharing a personal testimony with the group." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="chitungwiza.jpg" alt="The community gathered for a worship session." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="chitungwiza.jpg" alt="People enjoying fellowship and conversation after the main event." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                    <!-- Image 5 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="chitungwiza1.jpg" alt="Children participating in a dedicated prayer session." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                    <!-- Image 6 -->
+                    <div class="relative overflow-hidden rounded-2xl shadow-lg transition-transform transform hover:scale-105">
+                        <img src="chitungwiza2.jpg" alt="The entire group standing together for the closing prayer." class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                </div>
+            </section>
         </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Popup Modal -->
-  <div id="updateModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>Latest Update</h2>
-      <p>
-        📢 Exciting news! This year's GPS Day will feature a **special guest speaker**, 
-        an extended cultural program, and the launch of our new community initiative.  
-        Stay tuned for more details coming soon!
-      </p>
+    <!-- Modal for Updates -->
+    <div id="updates-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-overlay">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full animate-fade-in transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-indigo-800">Latest Announcements</h3>
+                <button id="close-updates" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <p class="text-gray-700 leading-relaxed">
+                We're excited to announce that the date for our next GPS Day is set!
+                Join us on <span class="font-bold text-indigo-600">May 26th</span> for a day of powerful Vibe.<br>
+                <p style="color:green;text-align: center;">Plain to join with us</p>
+                
+            </p>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>&copy; 2025 GPS Organization. All Rights Reserved.</p>
-  </footer>
+    <!-- Modal for Learn More/Join Us -->
+    <div id="learn-more-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden modal-overlay">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full animate-fade-in transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-purple-800">Join Our Community</h3>
+                <button id="close-learn-more" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <p class="text-gray-700 mb-4">
+                Enter your email to receive updates on future events and prayer initiatives.
+            </p>
+            <form>
+                <input type="email" placeholder="Your Email Address" class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 mb-4 transition-all">
+                <button type="submit" class="w-full bg-purple-600 text-white font-bold py-3 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </div>
 
-  <script>
-    // Modal control
-    function openModal() {
-      document.getElementById("updateModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("updateModal").style.display = "none";
-    }
-    window.onclick = function(event) {
-      if (event.target == document.getElementById("updateModal")) {
-        closeModal();
-      }
-    }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const updatesButton = document.getElementById('updates-button');
+            const updatesModal = document.getElementById('updates-modal');
+            const closeUpdates = document.getElementById('close-updates');
 
-    // Gallery pause/resume
-    const gallery = document.getElementById("galleryTrack");
+            const learnMoreButton = document.getElementById('learn-more-button');
+            const learnMoreModal = document.getElementById('learn-more-modal');
+            const closeLearnMore = document.getElementById('close-learn-more');
 
-    gallery.addEventListener("mouseenter", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("mouseleave", () => {
-      gallery.style.animationPlayState = "running";
-    });
-    gallery.addEventListener("touchstart", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("touchend", () => {
-      gallery.style.animationPlayState = "running";
-    });
-  </script>
+            const openModal = (modal) => {
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.firstElementChild.classList.remove('scale-95'), 10);
+            };
 
+            const closeModal = (modal) => {
+                modal.firstElementChild.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            };
+
+            updatesButton.addEventListener('click', () => openModal(updatesModal));
+            closeUpdates.addEventListener('click', () => closeModal(updatesModal));
+
+            learnMoreButton.addEventListener('click', () => openModal(learnMoreModal));
+            closeLearnMore.addEventListener('click', () => closeModal(learnMoreModal));
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target === updatesModal) {
+                    closeModal(updatesModal);
+                }
+                if (event.target === learnMoreModal) {
+                    closeModal(learnMoreModal);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
