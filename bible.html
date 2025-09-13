@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Versions</title>
+    <!-- Use Tailwind CSS for modern, responsive styling. It's a utility-first CSS framework. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section: A visually appealing banner for the application. -->
+    <header class="bg-indigo-900 text-white py-12 mb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2">Explore Bible Versions</h1>
+            <p class="text-lg md:text-xl font-light">
+                Discover different translations and versions of the Holy Bible in both English and Swahili.
+            </p>
+        </div>
+    </header>
+
+    <!-- Daily Verse Section: Displays a new verse each day. -->
+    <section class="container mx-auto px-4 mb-12">
+        <div class="bg-indigo-800 text-white p-8 rounded-xl shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-4">Daily Bible Verse</h2>
+            <div id="daily-verse-container" class="italic text-lg md:text-xl mb-4">
+                <!-- This is where the daily verse content will be loaded by the JavaScript. -->
+                <p id="verse-text" class="mb-2">Loading verse...</p>
+                <p id="verse-reference" class="font-semibold text-sm md:text-base text-yellow-300"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section: Displays the different Bible versions. -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- English Versions Section -->
+        <h2 class="text-3xl font-bold text-center mb-6 text-indigo-800">English Versions</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Card for a specific English version. -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">King James Version (KJV)</h3>
+                <p class="text-sm text-gray-500 mb-4">Classic & Formal</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A timeless classic known for its elegant, poetic language. It is a very influential translation in the English-speaking world.
+                </p>
+                <!-- This link will open in a new tab to an external Bible website. -->
+                <a href="https://www.bible.com/bible/1/GEN.1.KJV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read KJV
+                </a>
+            </div>
+
+            <!-- New International Version Card -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">New International Version (NIV)</h3>
+                <p class="text-sm text-gray-500 mb-4">Modern & Balanced</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A popular, highly readable translation that balances word-for-word accuracy with thought-for-thought clarity.
+                </p>
+                <a href="https://www.bible.com/bible/111/GEN.1.NIV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read NIV
+                </a>
+            </div>
+            
+            <!-- New Living Translation Card -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">New Living Translation (NLT)</h3>
+                <p class="text-sm text-gray-500 mb-4">Easy to Read</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A dynamic translation that is very easy to understand, making it great for new readers and casual study.
+                </p>
+                <a href="https://www.bible.com/bible/116/GEN.1.NLT" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read NLT
+                </a>
+            </div>
+
+            <!-- The Message Card -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">The Message (MSG)</h3>
+                <p class="text-sm text-gray-500 mb-4">Contemporary Paraphrase</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A highly contemporary and idiomatic paraphrase of the Bible, designed to bring its meaning to modern readers.
+                </p>
+                <a href="https://www.bible.com/bible/97/GEN.1.MSG" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read MSG
+                </a>
+            </div>
+            
+        </div>
+
+        <!-- Swahili Versions Section -->
+        <h2 class="text-3xl font-bold text-center mb-6 text-indigo-800">Swahili Versions</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Card for a specific Swahili version. -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Biblia Takatifu (SUV)</h3>
+                <p class="text-sm text-gray-500 mb-4">Union Version</p>
+                <p class="text-base text-gray-600 mb-6">
+                    The most common and widely used Swahili Bible translation. It is the go-to version for most Swahili-speaking Christians.
+                </p>
+                <a href="https://www.bible.com/bible/1824/GEN.1.SUV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read SUV
+                </a>
+            </div>
+
+            <!-- Neno: Bibilia Takatifu Card -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Neno: Bibilia Takatifu</h3>
+                <p class="text-sm text-gray-500 mb-4">Contemporary Swahili</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A modern Swahili translation that uses more contemporary language, making it more accessible and easier to read.
+                </p>
+                <a href="https://www.bible.com/bible/1825/GEN.1.NEN" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read Neno
+                </a>
+            </div>
+            
+            <!-- Biblia Habari Njema Card -->
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Biblia Habari Njema</h3>
+                <p class="text-sm text-gray-500 mb-4">Good News Translation</p>
+                <p class="text-base text-gray-600 mb-6">
+                    A Swahili translation based on the "Good News" principle, focusing on clear and natural language for easy comprehension.
+                </p>
+                <a href="https://www.bible.com/bible/563/GEN.1.BHN" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
+                    Read BHN
+                </a>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Chatting Area Section: A real-time chat for community members. -->
+    <section class="container mx-auto px-4 mt-12 pb-8">
+        <div class="bg-gray-800 text-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-bold mb-4 text-center">Community Chat</h2>
+            <div id="user-id-display" class="text-sm text-gray-400 mb-4 text-center">
+                <!-- Displays the current user's ID for identification in a collaborative app. -->
+                User ID: <span id="user-id-text" class="font-mono">...</span>
+            </div>
+            
+            <!-- The message display area. It's scrollable and will be populated by JavaScript. -->
+            <div id="chat-messages" class="h-64 overflow-y-auto bg-gray-900 rounded-lg p-4 mb-4 space-y-4">
+                <p id="chat-status" class="text-center text-gray-500 italic">Connecting to chat...</p>
+            </div>
+            
+            <!-- Form for typing and submitting new chat messages. -->
+            <form id="chat-form" class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="chat-input" placeholder="Type your message..." required
+                    class="flex-grow rounded-full p-3 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label for="file-upload" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300 cursor-pointer text-center">
+                    Upload
+                </label>
+                <input type="file" id="file-upload" class="hidden">
+                <button type="submit"
+                    class="bg-yellow-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-colors duration-300">
+                    Send
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 text-gray-600 py-6 text-center mt-12">
+        <p>&copy; 2024 God's Prayer Squad. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Section: Handles all dynamic functionality. -->
+    <script type="module">
+        // Import necessary Firebase modules.
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+        
+        // Global variables are provided by the environment. We must check for their existence.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Get references to key HTML elements.
+        const chatStatusElement = document.getElementById('chat-status');
+        const userIdTextElement = document.getElementById('user-id-text');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const fileUploadInput = document.getElementById('file-upload');
+        const chatMessagesContainer = document.getElementById('chat-messages');
+
+        let db, auth, storage; // Firebase instances
+        let isAuthReady = false; // Flag to check if authentication is complete
+        let userId; // Stores the current user's ID
+
+        // This event listener runs when the entire page is loaded.
+        document.addEventListener('DOMContentLoaded', async () => {
+            const verseTextElement = document.getElementById('verse-text');
+            const verseReferenceElement = document.getElementById('verse-reference');
+
+            // Daily Verse Logic: A simple way to display a new verse each day.
+            const dailyVerses = [
+                { text: "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.", reference: "John 3:16" },
+                { text: "The Lord is my shepherd; I shall not want.", reference: "Psalm 23:1" },
+                { text: "Trust in the Lord with all your heart, and do not lean on your own understanding.", reference: "Proverbs 3:5" },
+                { text: "I can do all things through him who strengthens me.", reference: "Philippians 4:13" },
+                { text: "For where two or three are gathered in my name, there am I among them.", reference: "Matthew 18:20" },
+                { text: "But he was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him, and by his wounds we are healed.", reference: "Isaiah 53:5" },
+                { text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.", reference: "Isaiah 41:10" },
+                { text: "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.", reference: "Lamentations 3:22-23" },
+                { text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.", reference: "Romans 8:28" }
+            ];
+
+            const now = new Date();
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+
+            const verseIndex = dayOfYear % dailyVerses.length;
+            const todayVerse = dailyVerses[verseIndex];
+
+            verseTextElement.textContent = `"${todayVerse.text}"`;
+            verseReferenceElement.textContent = todayVerse.reference;
+
+            // Initialize Firebase services and handle authentication.
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                storage = getStorage(app);
+                
+                // Use the provided custom token for a seamless sign-in process.
+                // If a token isn't available, sign in anonymously to still allow public chat access.
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                // After successful authentication, get the user's unique ID.
+                userId = auth.currentUser?.uid;
+                if (userId) {
+                    userIdTextElement.textContent = userId;
+                    isAuthReady = true;
+                    chatStatusElement.textContent = "Welcome to the chat!";
+                    // Once authenticated, set up the real-time chat listener.
+                    setupChatListener();
+                } else {
+                    // This is a safety check in case the user ID is not retrieved.
+                    console.error("User ID is null after sign-in.");
+                    chatStatusElement.textContent = "Authentication error. Could not get user ID.";
+                }
+
+            } catch (error) {
+                console.error("Firebase initialization or authentication failed:", error);
+                chatStatusElement.textContent = "Failed to connect to chat. Check console for details.";
+            }
+
+        });
+
+        // Helper function to reference the correct Firestore collection path.
+        // The path is structured for public, shared data within this specific app.
+        const chatCollection = () => collection(db, `artifacts/${appId}/public/data/chat_messages`);
+
+        // Function to create and display a single chat message element.
+        const displayMessage = (messageData) => {
+            const messageDiv = document.createElement('div');
+            // 'max-w-[80%]' ensures messages are responsive and don't take up the full width on small screens.
+            messageDiv.classList.add('rounded-lg', 'p-3', 'max-w-[80%]', 'break-words', 'shadow-md');
+            
+            // Checks if the message was sent by the current user to apply specific styling.
+            const isSelf = messageData.userId === userId;
+            if (isSelf) {
+                messageDiv.classList.add('bg-indigo-600', 'text-white', 'ml-auto', 'rounded-br-none');
+            } else {
+                messageDiv.classList.add('bg-gray-700', 'text-white', 'rounded-bl-none');
+            }
+
+            const usernameSpan = document.createElement('span');
+            usernameSpan.classList.add('font-semibold', 'text-sm', 'block', isSelf ? 'text-indigo-200' : 'text-gray-300');
+            usernameSpan.textContent = isSelf ? "You" : messageData.userId;
+            
+            messageDiv.appendChild(usernameSpan);
+
+            // Check if the message contains a text, an image, a document, or an audio file.
+            if (messageData.text) {
+                const messageP = document.createElement('p');
+                messageP.classList.add('text-base', 'mt-1');
+                messageP.textContent = messageData.text;
+                messageDiv.appendChild(messageP);
+            } else if (messageData.fileUrl && messageData.fileType) {
+                if (messageData.fileType.startsWith('image/')) {
+                    const img = document.createElement('img');
+                    img.src = messageData.fileUrl;
+                    img.alt = 'Uploaded Image';
+                    img.classList.add('rounded-lg', 'mt-2', 'max-h-64', 'object-contain', 'w-full');
+                    messageDiv.appendChild(img);
+                } else if (messageData.fileType.startsWith('audio/')) {
+                    // Create an audio player for audio files.
+                    const audio = document.createElement('audio');
+                    audio.controls = true;
+                    audio.src = messageData.fileUrl;
+                    audio.classList.add('mt-2', 'w-full');
+                    messageDiv.appendChild(audio);
+                } else {
+                    const fileLink = document.createElement('a');
+                    fileLink.href = messageData.fileUrl;
+                    fileLink.textContent = `Download: ${messageData.fileName}`;
+                    fileLink.target = "_blank";
+                    fileLink.classList.add('text-yellow-300', 'underline', 'mt-1', 'block');
+                    messageDiv.appendChild(fileLink);
+                }
+            }
+            
+            chatMessagesContainer.appendChild(messageDiv);
+            // Scrolls to the bottom of the chat container to show the latest message.
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        };
+        
+        // Sets up a real-time listener to Firestore.
+        const setupChatListener = () => {
+            // The `query` function fetches messages from the Firestore collection.
+            // `orderBy("timestamp")` is crucial for multi-user chat. It sorts the messages
+            // chronologically, ensuring they appear in the correct order.
+            const q = query(chatCollection(), orderBy("timestamp"));
+            
+            // `onSnapshot` listens for real-time changes to the query results.
+            onSnapshot(q, (snapshot) => {
+                // Clears the chat messages container to redraw the updated list.
+                chatMessagesContainer.innerHTML = '';
+                if (snapshot.empty) {
+                    chatStatusElement.textContent = "No messages yet. Be the first to chat!";
+                } else {
+                    chatStatusElement.style.display = 'none';
+                    // Loop through each document (message) and display it.
+                    snapshot.docs.forEach(doc => {
+                        displayMessage(doc.data());
+                    });
+                }
+            }, (error) => {
+                console.error("Error fetching messages: ", error);
+                chatStatusElement.textContent = "Error loading messages.";
+            });
+        };
+        
+        // Handles the form submission for sending a new message.
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevents the form from submitting in the traditional way (page refresh).
+            
+            // Check if Firebase is ready before attempting to send a message.
+            if (!isAuthReady) {
+                console.error("Firebase not initialized yet.");
+                return;
+            }
+            
+            const messageText = chatInput.value.trim();
+            const file = fileUploadInput.files[0];
+            
+            if (messageText === "" && !file) {
+                // Do not send an empty message or if there is no file.
+                return;
+            }
+            
+            try {
+                if (file) {
+                    const filePath = `artifacts/${appId}/public/data/chat_uploads/${file.name}_${Date.now()}`;
+                    const fileRef = ref(storage, filePath);
+
+                    // Upload the file to Firebase Storage
+                    await uploadBytes(fileRef, file);
+                    
+                    // Get the public download URL
+                    const fileUrl = await getDownloadURL(fileRef);
+
+                    // Add a new document (the file message) to the chat collection.
+                    await addDoc(chatCollection(), {
+                        userId: userId,
+                        text: null,
+                        fileUrl: fileUrl,
+                        fileType: file.type,
+                        fileName: file.name,
+                        timestamp: serverTimestamp()
+                    });
+                } else if (messageText) {
+                    // Add a new document (the text message) to the chat collection.
+                    await addDoc(chatCollection(), {
+                        userId: userId,
+                        text: messageText,
+                        timestamp: serverTimestamp()
+                    });
+                }
+
+                chatInput.value = ""; // Clear the input field after sending.
+                fileUploadInput.value = ""; // Clear the file input
+            } catch (error) {
+                console.error("Error sending message or uploading file: ", error);
+            }
+        });
+
+    </script>
+</body>
+</html>

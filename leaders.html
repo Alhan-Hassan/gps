@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leader Profiles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        background-image: linear-gradient(to right top, #eb8808, #f86548, #ec4f74, #c85098, #925aab, #746eba, #567dbf, #4489bb, #64a6c7, #8cc2d2, #b9dce1, #e7f6f5);
+        .profile-card {
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, all 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            color: white;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .toggle-btn:active {
+            transform: scale(0.98);
+        }
+        .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .details.show {
+            max-height: 500px;
+        }
+        .profile-card.expanded {
+            max-width: none;
+            flex-direction: row;
+            text-align: left;
+            padding: 2rem;
+            display: flex;
+        }
+        .profile-card.expanded img {
+            margin-right: 2rem;
+            margin-bottom: 0;
+        }
+        .profile-card.expanded .profile-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a237e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100;
+        }
+        header .logo {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ffb74d;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: color 0.3s ease;
+        }
+        header .logo:hover {
+            color: #ffd54f;
+        }
+        nav {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            text-align: center;
+            background-color: #283593;
+            padding: 14px 0;
+        }
+        nav h1 {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0;
+        }
+        /* New CSS for rotation animation and color change */
+        .rotate-animation {
+            transform: rotate(360deg);
+            transition: transform 0.8s ease-in-out;
+            cursor: pointer;
+        }
+        .color-change {
+            color: #3b82f6; /* A noticeable blue color */
+            transition: color 0.8s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center min-h-screen p-4 pt-48">
+
+    <header>
+        <div class="logo">
+            <img src="https://via.placeholder.com/50x50?text=GPS" alt="God's Prayer Squad" style="vertical-align: middle; margin-right: 15px; border-radius: 50%;">
+            God's Prayer Squad
+        </div>
+    </header>
+
+    <nav>
+        <h1>2025/2026 Gps coordinators</h1>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8 max-w-7xl">
+        <h1 class="text-5xl font-extrabold text-center text-gray-900 mb-12 drop-shadow-md">
+            Meet Our Leaders
+        </h1>
+
+        <div id="profiles-container">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Main Leaders</h2>
+            <div id="first-layer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center mb-8"></div>
+            
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Department Leaders</h2>
+            <hr style="height: 5px; background-color: #e5e7eb; border: none; margin: 20px 0;">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Secretary Coordinator</h2>
+            <div id="second-layer" class="grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center mb-8"></div>
+            
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Finacil,Media And Social Coordinators</h2>
+            <div id="third-layer" class="grid grid-cols-1 sm:grid-cols-3 gap-8 justify-items-center mb-8"></div>
+            
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Hostel And Villages Coordinators</h2>
+            <div id="last-layer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center"></div>
+        </div>
+    </div>
+
+    <script>
+        const leaders = [
+            {
+                squad: "Habakuki",
+                role: "Main Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Led her company to a record-breaking IPO in 2022 and launched a global initiative to promote digital literacy in underserved communities.",
+                image: "https://via.placeholder.com/150/ef4444/FFFFFF?text=H1",
+                color: "bg-emerald-500",
+                background: "red",
+            },
+            {
+                squad: "Luce",
+                role: "Vice Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Orchestrated a major merger of two international banks, resulting in the creation of a global financial powerhouse and increased stability in the market.",
+                image: "https://via.placeholder.com/150/f97316/FFFFFF?text=L2",
+                color: "bg-blue-500",
+            },
+            {
+                squad: "Kilibuche",
+                role: "Main Secretary Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Developed a new vaccine delivery system that significantly improved vaccination rates in remote, rural areas across several continents.",
+                image: "https://via.placeholder.com/150/10b981/FFFFFF?text=K3",
+                color: "bg-orange-500",
+            },
+            {
+                squad: "Revocatus",
+                role: "Assistant Secretary",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Successfully lobbied for new renewable energy policies, leading to a nationwide increase in the adoption of clean power sources.",
+                image: "https://via.placeholder.com/150/d946ef/FFFFFF?text=R4",
+                color: "bg-emerald-500",
+            },
+            {
+                squad: "Einoth",
+                role: "Financial Coodinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Led a groundbreaking project to digitally archive and restore ancient manuscripts, making them accessible to scholars globally for the first time.",
+                image: "https://via.placeholder.com/150/ef4444/FFFFFF?text=E5",
+                color: "bg-fuchsia-500",
+            },
+            {
+                squad: "Elia",
+                role: "Media Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Published a landmark paper on AI ethics that has become a foundational text for tech companies and academic institutions worldwide.",
+                image: "https://via.placeholder.com/150/60a5fa/FFFFFF?text=E6",
+                color: "bg-red-500",
+            },
+            {
+                squad: "Noel",
+                role: "Social Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Designed and oversaw the construction of a carbon-neutral city district that has become a global model for sustainable urban development.",
+                image: "https://via.placeholder.com/150/f59e0b/FFFFFF?text=N7",
+                color: "bg-blue-500",
+            },
+            {
+                squad: "Irene",
+                role: "Women Hostel Coodinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Established a network of community gardens and agricultural cooperatives that have significantly reduced food scarcity in several regions.",
+                image: "https://via.placeholder.com/150/8b5cf6/FFFFFF?text=I8",
+                color: "bg-amber-500",
+            },
+            {
+                squad: "George",
+                role: "Men Hostel Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Oversaw the successful launch and deployment of a new orbital telescope that has provided unprecedented views of distant galaxies.",
+                image: "https://via.placeholder.com/150/14b8a6/FFFFFF?text=G9",
+                color: "bg-violet-500",
+            },
+            {
+                squad: "Happy",
+                role: "Ikuti Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Developed an autonomous drone system that can quickly locate survivors in collapsed buildings and difficult-to-reach areas.",
+                image: "https://via.placeholder.com/150/6366f1/FFFFFF?text=H10",
+                color: "bg-red-500",
+            },
+            {
+                squad: "John",
+                role: "Coca Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "Her online learning platform has been adopted by over 50,000 schools in developing countries, providing millions of students with access to education.",
+                image: "https://via.placeholder.com/150/60a5fa/FFFFFF?text=J11",
+                color: "bg-teal-500",
+            },
+            {
+                squad: "Essau",
+                role: "Inyara Coordinator",
+                contact: "0699889376",
+                email: "alhanh52@gmail.com",
+                course: "Instagram",
+                level: "4",
+                achievement: "He was one of the first investors in a company that is now a leader in sustainable agriculture, and his funding helped them scale their operations globally.",
+                image: "https://via.placeholder.com/150/f59e0b/FFFFFF?text=E12",
+                color: "bg-indigo-500",
+            }
+        ];
+
+        const firstLayer = document.getElementById('first-layer');
+        const secondLayer = document.getElementById('second-layer');
+        const thirdLayer = document.getElementById('third-layer');
+        const lastLayer = document.getElementById('last-layer');
+
+        function generateProfiles() {
+            let firstLayerHtml = '';
+            let secondLayerHtml = '';
+            let thirdLayerHtml = '';
+            let lastLayerHtml = '';
+
+            leaders.forEach((leader, index) => {
+                const cardHtml = `
+                    <div class="profile-card p-6 flex flex-col items-center text-center max-w-xs">
+                        <img src="${leader.image}" alt="Leader ${leader.squad}" class="w-32 h-32 rounded-full mb-4 shadow-lg">
+                        <div class="profile-content flex flex-col items-center text-center">
+                            <h2 class="text-2xl font-bold text-gray-800">Squad: ${leader.squad}</h2>
+                            <p class="text-sm text-gray-500 font-medium mb-4">${leader.role}</p>
+                            <button onclick="toggleProfile(this)" class="toggle-btn ${leader.color} hover:${leader.color.replace('500', '600')}" data-color-class="${leader.color}">
+                                Show Details
+                            </button>
+                            <div class="details mt-4 text-gray-600 w-full text-left">
+                                <p class="font-bold">Info:</p>
+                                <p class="mt-1 text-sm">Contact: ${leader.contact}<br>Email: ${leader.email}<br>Course: ${leader.course}<br>Level: ${leader.level}<sup>th</sup> year</p>
+                                <p class="mt-2 text-sm font-bold">Key Achievement:</p>
+                                <p class="mt-1 text-sm">${leader.achievement}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (index < 2) {
+                    firstLayerHtml += cardHtml;
+                } else if (index < 4) {
+                    secondLayerHtml += cardHtml;
+                } else if (index < 7) {
+                    thirdLayerHtml += cardHtml;
+                } else {
+                    lastLayerHtml += cardHtml;
+                }
+            });
+
+            firstLayer.innerHTML = firstLayerHtml;
+            secondLayer.innerHTML = secondLayerHtml;
+            thirdLayer.innerHTML = thirdLayerHtml;
+            lastLayer.innerHTML = lastLayerHtml;
+        }
+
+        function toggleProfile(buttonElement) {
+            const currentCard = buttonElement.closest('.profile-card');
+            const detailsElement = currentCard.querySelector('.details');
+            const originalColor = buttonElement.dataset.colorClass;
+
+            document.querySelectorAll('.profile-card.expanded').forEach(card => {
+                if (card !== currentCard) {
+                    const btn = card.querySelector('.toggle-btn');
+                    const colorClass = btn.dataset.colorClass;
+                    btn.classList.remove('bg-red-500', 'hover:bg-red-600');
+                    btn.classList.add(colorClass, `hover:${colorClass.replace('500', '600')}`);
+                    btn.textContent = 'Show Details';
+                    card.classList.remove('expanded');
+                    card.querySelector('.details').classList.remove('show');
+                }
+            });
+
+            currentCard.classList.toggle('expanded');
+            detailsElement.classList.toggle('show');
+
+            if (currentCard.classList.contains('expanded')) {
+                buttonElement.textContent = 'Hide Details';
+                buttonElement.classList.remove(originalColor, `hover:${originalColor.replace('500', '600')}`);
+                buttonElement.classList.add('bg-red-500', 'hover:bg-red-600');
+            } else {
+                buttonElement.textContent = 'Show Details';
+                buttonElement.classList.remove('bg-red-500', 'hover:bg-red-600');
+                buttonElement.classList.add(originalColor, `hover:${originalColor.replace('500', '600')}`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generateProfiles();
+
+            // Select all <h2> headings within the profiles-container
+            const headings = document.querySelectorAll('#profiles-container h2');
+
+            // Add a click event listener to each heading
+            headings.forEach(heading => {
+                heading.addEventListener('click', () => {
+                    // Toggle both the rotation and the color-change classes
+                    heading.classList.toggle('rotate-animation');
+                    heading.classList.toggle('color-change');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

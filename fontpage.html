@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God's Prayer Squad</title>
+    <style>
+           /* General body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f0f4f8; 
+            color: #333;
+            line-height: 1.6;
+            padding-top: 150px; 
+        }
+
+        /* --- Fixed Header and Nav --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a237e; 
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100; 
+        }
+
+        header .logo {
+            font-size: 2.5em; 
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ffb74d; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            transition: color 0.3s ease;
+        }
+        
+        header .logo:hover {
+            color: #ffd54f;
+        }
+
+        nav {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        /* Navigation styling (Horizontal buttons) */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #283593; 
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #3f51b5; 
+            transform: scale(1.1); 
+        }
+        
+        /* Welcome section styling */
+        .welcome {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to right, #42a5f5, #2196f3); 
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .welcome h1 {
+            font-size: 3em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: colorChange 10s infinite cubic-bezier(0.8, 0.2, 0.2, 0.8) alternate;
+        }
+        
+        /* The CSS Keyframes Animation */
+        @keyframes colorChange {
+            0%   { color: #ff8a65; transform: translateY(0) scale(1); }
+            20%  { color: #4db6ac; transform: translateY(-10px) scale(1.05); }
+            40%  { color: #ba68c8; transform: translateY(0) scale(1); }
+            60%  { color: #aed581; transform: translateY(10px) scale(1.05); }
+            80% { color: #ffc107; transform: translateY(0) scale(1); }
+            100% { color: #f48fb1; transform: translateY(-10px) scale(1.05); }
+        }
+
+        /* Timetable section styling */
+        .timetable {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            text-align: center;
+
+        }
+
+        .A{
+            width: 300px;
+            height: 300px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            color: #1a237e;
+            font-weight: bold;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .A img{
+            width: 80%;
+            height: 150px;
+            border-top-left-radius: 30px;
+             border-bottom-right-radius: 30px;
+            margin-left: 20px;
+
+        }
+        
+        .A:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Paragraph text styling */
+        .paragraph-text {
+            color: white;
+            padding: 5px;
+            max-width: 800px;
+            margin: 20px auto; 
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            background-image: linear-gradient(to left, #0e2b92, #0052af, #0074c0, #0094c9, #00b2cd, #00b2cf, #00b3d1, #00b3d3, #0095d4, #0074d1, #004fc3, #181ea4);
+        }
+        .mission{
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        /* --- Pop-up styles --- */
+        .popup-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease-out;
+            justify-content: space-between;
+        }
+        
+        .popup-overlay.active .popup-content {
+            transform: scale(1);
+        }
+        
+    
+        
+      
+        .popup-close-btn {
+            background: #e57373;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-close-btn:hover {
+            background: #ef5350;
+        }
+
+        .log img{
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background-color: white;
+            margin-bottom: 100px;
+        }
+
+
+        /* Content Sections */
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .content-section {
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start; /* Aligns items to the top for a consistent look */
+            }
+
+            .content-section.reverse {
+                flex-direction: row-reverse;
+            }
+        }
+
+        .content-section .image-container {
+            flex: 2; /* Made larger */
+            min-width: 500px; /* Increased minimum size */
+            text-align: center;
+        }
+
+        .content-section .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .content-section .text-container {
+            flex: 1; /* Balanced with the new image size */
+        }
+
+        .content-section h3 {
+            color: #1a237e;
+            font-size: 1.8em;
+            margin-top: 0;
+        }
+
+        .popup-content img{
+            height: 50%px;
+            width: 100%;
+        }
+        
+        .media{
+            text-align: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: darkcyan;
+            transform: translateY(100px);
+            color: whitesmoke;
+
+        }
+        .media a{
+            text-decoration: none;
+            background-color: darkcyan;
+            padding: 7px;
+            color: whitesmoke; 
+            border-radius: 20px;
+            font-size: 15px;
+            box-shadow: 0 20px 20px rgb(0, 0, 0,1); 
+        }
+        .prayer{
+            text-align: center;
+        }
+        .prayer a{
+            text-decoration: none;
+            background-color: darkblue;
+            color: whitesmoke;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .prayer a:hover{
+            color: darkgoldenrod;
+        }
+        footer{
+            text-align: center;
+            color: whitesmoke;
+            padding: 20px;
+            background-color: darkblue;
+            margin-top: 80px;
+        }
+        .uniform{
+            display: flex;
+            justify-content: center;
+             gap: 10px;
+             margin-top: 20px; 
+
+        }
+        .sale{
+            background-color: whitesmoke;
+            box-shadow: 0 20px 20px rgba(0, 0, 0, 1.0);
+            width: 250px;
+            height: 250px;
+             transition: transform 6s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        
+
+        }
+        .sale img{
+            width: 100%;
+            height:250px;
+        }
+        .sale:hover{
+            transform: translateY(10px);
+
+        }
+        .mobile{
+            justify-content:center;
+            align-items: center;
+            display: flex;
+            font-weight: bold;
+            color: green;
+        }
+        .mobile img{
+            height: 50px;
+            width: 50px;
+        }
+
+
+      
+
+    </style>
+</head>
+<body>
+
+
+    <header>
+
+      
+        <div class="logo">
+            <img src="https://via.placeholder.com/50x50?text=GPS"alt="GPS" style="vertical-align: middle; margin-right: 25px; border-radius: 50%;">
+            God's Prayer Squad<br>
+         
+
+        </div>
+    </header>
+
+    <nav>
+       
+        <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a id="visit-btn">Account</a></li>
+            <li><a id="contact-btn">Contact</a></li>
+           <li> <a href="bible.html">Read Bible</a></li>
+        </ul>
+    </nav>
+
+    <div class="welcome" id="home">
+        <h1 id="welcome-heading">Welcome To GPS Family</h1>
+          <h2>Season Of Walking In Divine Capacity</h2> 
+    </div>  
+    </div>  
+<div class="mission">
+   <h2> Our Mission</h2><br>
+    Our mission is to spread God's love through a dedicated ministry of prayer and compassionate service.<br>
+
+    We exist to build a foundation of spiritual strength through prayer, which empowers our outreach efforts to those in need.<br>
+
+
+    Our calling is to demonstrate the power of God's word by putting our faith into tangible service for our neighbors.<br>
+
+
+
+</div>
+
+
+    <div class="paragraph-text">
+        
+            <p>
+                Check out our timetable to find a session that fits your schedule and come experience the power of the GPS Family. We are always happy to welcome new members into our fold.
+            </p>
+    </div>
+
+
+    <h2 style="text-align: center; font-weight: bold; color: blue;margin-top: 20px;">Our Weekly Schedule</h2>
+    <div class="timetable">
+        <div class="A">
+            <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\tuesday service.jpg" alt="picha">
+            Word Service<br>
+            <hr/>
+            From 21:00 PM <br>To 22:30 PM<br>
+            Venue: Tafes Chappel
+        </div>  
+        <div class="A">
+             <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\night prayer.jpg" alt="picha">
+            Night Prayer<br>
+            <hr/>
+             From 21:00 PM<br> To 22:30 PM<br>
+             Venue: Getsemane Garden
+        </div>
+        <div class="A">
+             <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\chitungwiza1.jpg" alt="picha">
+            Marching Prayer<br>
+            <hr/>
+            From 04:00 AM<br> To 07:00 AM<br>
+            Venue:Chitungwiza 
+        </div>
+    </div>
+
+
+
+
+
+<h1 style="text-align:center;">Our Community</h1>
+  <!-- First content layer: Image left, text right -->
+    <div class="content-section" id="about">
+        <div class="image-container">
+            <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\chitunwiza3.jpg" alt="A group praying together">
+        </div>
+        <div class="text-container">
+            <h3>Squad Family</h3>
+           
+            <p>
+                We gather to lift up our prayers for our families, our city, and the world. Our vision is to see a generation passionate about prayer and committed to living out their faith in tangible ways.
+            </p>
+        </div>
+    </div>
+
+    <!-- Second content layer: Image right, text left -->
+    <div class="content-section reverse" id="articles">
+        <div class="image-container">
+            <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\chitungwiza2.jpg" alt="People gathering for an event">
+        </div>
+        <div class="text-container">
+            <h3>Squad Event</h3>
+            <p>
+                Our meetings are more than just a schedule; they are opportunities for spiritual growth and community building. We have a weekly timetable of sessions designed to meet together.  Our sessions include deep Word Sevice, Night Prayer, and powerful Marching Prayer.
+            </p>
+           
+        </div>
+    </div>
+    <div class="prayer">
+        <a href="prayer.html">Fasting And Prayer</a>
+         <a href="events.html">Our Events</a>
+          <a href="leaders.html">Our Leader</a>
+           
+    </div>
+     <h3 style="text-align:center;margin-top: 50px;">Meet Our Uniform</h3>
+    <div class="uniform">
+         <div class="sale" >
+             <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\white sale.jpg">
+         </div>
+          <div class="sale" >
+             <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\sale nyeusi best.jpg">
+         </div>
+          <div class="sale" >
+             <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\sale orange best.jpg">
+         </div>
+        
+    </div>
+
+    <div class="media">
+         follow us on our social media 
+   <a href="https://www.instagram.com/god_s_prayer_squad_gps/"> Instagram</a>
+   <a href="https://www.facebook.com/search/top?q=gods%20prayer%20squad%20-gps">  Facebook</a>
+    <a href="https://www.instagram.com/god_s_prayer_squad_gps/">  Tiktok</a>
+     <a href="#">  Twitter</a>
+        god_s_prayer_squad
+    </div>
+
+<footer>
+
+    &copy;2025 gps.All rights are reserved<br>
+    <p style="color: darkcyan;">
+    Desined by Alhan<br>
+    +255699889376/+255750589376<br>
+    alhanh52@gmail.com
+    </p>
+</footer>
+    <div id="contact-popup" class="popup-overlay">
+        <div class="popup-content">
+            <h3>Contact Information</h3>
+            <p><strong>Nornal Call:</strong> +255699889376</p>
+              <p><strong>whatssap No:</strong> +255699889376</p>
+            <p><strong>Email:</strong> alhanh52@gmail.com</p>
+            <p><strong>Location:</strong> Mbeya, Tanzania</p>
+            <button class="popup-close-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="visit-popup" class="popup-overlay">
+          
+        <div class="popup-content">
+              <h4>Support Our Family through Your Offering</h4>
+            <h3>Our Bank Account</h3>
+
+          <div class="Bank">
+            <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\account.jpg" alt="Account logo">
+          </div>
+          <hr style="height: 3px; background-color: green;">
+           <h3>Our mobile Account</h3>
+            <h4>name: God's Prayer Squad</h4>
+           <div class="mobile">
+            <img src="C:\Users\KILIBUCHE\Documents\Adobe\others\call1-removebg-preview.png" alt="mobile">
+            Voda Lipa namba: 56540743<br>airtel Lipa Namba:13891728 
+          </div>
+            <button class="popup-close-btn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to open any popup by its ID
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'flex';
+        }
+
+        // Function to close any popup by its ID
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Get all buttons and add event listeners
+        const contactBtn = document.getElementById('contact-btn');
+        const visitBtn = document.getElementById('visit-btn');
+
+        contactBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('contact-popup');
+        });
+
+        visitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openPopup('visit-popup');
+        });
+
+
+        // Add event listeners for closing pop-ups
+        const closeButtons = document.querySelectorAll('.popup-close-btn');
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const popup = e.target.closest('.popup-overlay');
+                if (popup) {
+                    closePopup(popup.id);
+                }
+            });
+        });
+
+        // Optional: Close pop-up when clicking outside the content
+        const overlays = document.querySelectorAll('.popup-overlay');
+        overlays.forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target.classList.contains('popup-overlay')) {
+                    closePopup(e.target.id);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
