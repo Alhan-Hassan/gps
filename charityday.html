@@ -1,247 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>GPS Day Celebration</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-image: linear-gradient(to left, #2fb509, #65b300, #88b000, #a4ad00, #bca900, #d09400, #df7c0c, #ea6228, #e42049, #c9006c, #92008d, #181ea4);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
-    }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>God's Prayer Squad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 100px;
+        }
 
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* --- Fixed Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a237e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100;
+        }
 
-    header {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 20px;
-    }
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
+        header .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 25px;
+            transition: transform 0.3s ease;
+        }
 
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
-    }
+        header .logo-container img:hover {
+            transform: scale(1.1);
+        }
 
-    section {
-      padding: 30px;
-    }
+        header .logo-container .logo-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffb74d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
 
-    .event-details {
-      max-width: 100%;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
+        /* Main content styling */
+        .content-section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+        
+        .content-section h2 {
+            font-size: 2.5em;
+            color: #1a237e;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
 
-    .buttons {
-      margin: 20px 0;
-    }
+        .content-section p {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
 
-    .buttons button {
-      background: #004080;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      margin: 10px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+        /* Impact section with CSS Grid */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
 
-    .buttons button:hover {
-      background: #0066cc;
-    }
+        .impact-card {
+            background-color: #e3f2fd;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .impact-card h3 {
+            color: #1a237e;
+            font-size: 1.8em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .impact-card p {
+            color: #555;
+            font-size: 1em;
+            margin: 0;
+        }
 
-    .gallery {
-      margin-top: 30px;
-      overflow: hidden;
-      position: relative;
-      height: 220px;
-    }
+        /* Image Gallery Styling */
+        .gallery-section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 2rem auto;
+            background-color: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
 
-    .gallery-track {
-      display: flex;
-      width: calc(300px * 6);
-      animation: scroll 20s linear infinite;
-      animation-play-state: running;
-    }
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
 
-    .gallery img {
-      width: 300px;
-      height: 200px;
-      margin: 10px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+        .image-card {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
 
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+        .image-card:hover {
+            transform: scale(1.05);
+        }
 
-    footer {
-      background: rgba(0, 64, 128, 0.9);
-      color: white;
-      padding: 15px;
-      margin-top: 40px;
-    }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* Popup modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.6);
-    }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 35, 126, 0.8);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transform: translateY(100%); /* Start from the bottom */
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
 
-    .modal-content {
-      background: white;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      max-width: 500px;
-      text-align: left;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      animation: fadeIn 0.5s ease;
-    }
+        .image-card:hover .image-overlay {
+            opacity: 1;
+            transform: translateY(0); /* Slide up to cover the image */
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+        .image-overlay h4 {
+            font-size: 1.5em;
+            margin: 0;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
 
-    .modal-content h2 {
-      margin-top: 0;
-      color: #004080;
-    }
+        .image-overlay p {
+            font-size: 1em;
+            margin: 0;
+        }
 
-    .close-btn {
-      float: right;
-      font-size: 1.5em;
-      font-weight: bold;
-      cursor: pointer;
-      color: #444;
-    }
+        /* Footer styling */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 0.9em;
+            gap: 1px;
+        }
 
-    .close-btn:hover {
-      color: red;
-    }
-  </style>
+        footer a {
+            color: #ffb74d;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffd54f;
+            text-decoration: underline;
+        }
+
+        .logo-container img {
+            border-radius: 30%;
+            height: 30px;
+            width: 30px;
+            background-color: white;
+        }
+        
+    </style>
 </head>
+
 <body>
-
-  <header>
-    <h1>Charity Day Outreach</h1>
-    <p>Honoring the foundation of our organization</p>
-  </header>
-
-  <section>
-    <div class="event-details">
-      <!-- Buttons -->
-      <div class="buttons">
-        <button onclick="window.location.href='charity past.html'">Past Events</button>
-        <button onclick="openModal()">Latest Update</button>
-      </div>
-
-      <h2>About the Event</h2>
-      <p>
-        GPS Day is a special occasion to remember the day our organization was formed. 
-        It celebrates our journey, achievements, and the people who made it possible. 
-        Every year, we come together to reflect on our past, celebrate the present, 
-        and look forward to a brighter future.
-      </p>
-
-      <h2>Event Highlights</h2>
-      <ul style="text-align:left; max-width:600px; margin:auto;">
-        <li>Cultural performances</li>
-        <li>Guest speeches and honors</li>
-        <li>Team awards and recognitions</li>
-        <li>Fun activities and games</li>
-        <li>Community dinner</li>
-      </ul>
-
-      <!-- Moving Image Gallery -->
-      <div class="gallery">
-        <div class="gallery-track" id="galleryTrack">
-          <img src="C:\Users\KILIBUCHE\Documents\Adobe\project\charity2.jpg" alt="Event Photo 1">
-          <img src="https://picsum.photos/id/1016/300/200" alt="Event Photo 2">
-          <img src="https://picsum.photos/id/1025/300/200" alt="Event Photo 3">
-          <img src="https://picsum.photos/id/1035/300/200" alt="Event Photo 4">
-          <img src="https://picsum.photos/id/1040/300/200" alt="Event Photo 5">
-          <img src="https://picsum.photos/id/1050/300/200" alt="Event Photo 6">
+    <header>
+        <div class="logo-container">
+            <img src="https://placehold.co/50x50/1a237e/ffffff?text=GPS" alt="God's Prayer Squad Logo">
+            <div class="logo-text">God's Prayer Squad</div>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
+    
+    <!-- New Content Section -->
+    <main class="content-section">
+        <h2>The Story of Our Charity Day</h2>
+        <p>
+            On this special day, we came together as God's Prayer Squad to make a tangible difference in our community. We believe that prayer, when combined with action, can create miracles. Our annual Charity Day is a testament to this belief, bringing us closer to those in need and allowing us to be the hands and feet of our faith.
+        </p>
+        <p>
+            This year, our focus was on providing essential resources to homeless families in the city center. We organized a food drive, a clothing collection, and a mobile clinic offering basic health check-ups. The outpouring of support from volunteers and donors was truly heartwarming and a powerful display of community spirit.
+        </p>
 
-  <!-- Popup Modal -->
-  <div id="updateModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>Latest Update</h2>
-      <p>
-        📢 Exciting news! This year's GPS Day will feature a **special guest speaker**, 
-        an extended cultural program, and the launch of our new community initiative.  
-        Stay tuned for more details coming soon!
-      </p>
-    </div>
-  </div>
+        <h2>Our Impact: A Glimpse of the Day</h2>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <h3>Food Donations</h3>
+                <p>Over 500 meals were prepared and distributed, providing nourishment and hope to those facing hardship.</p>
+            </div>
+            <div class="impact-card">
+                <h3>Clothing & Warmth</h3>
+                <p>We collected and donated over 1,000 articles of clothing, including warm jackets and blankets for the coming winter.</p>
+            </div>
+            <div class="impact-card">
+                <h3>Health & Wellness</h3>
+                <p>Our mobile clinic offered free check-ups and medical advice to over 200 individuals, ensuring their health needs were not overlooked.</p>
+            </div>
+        </div>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 GPS Organization. All Rights Reserved.</p>
-  </footer>
+    <!-- New Image Gallery Section -->
+    <section class="gallery-section">
+        <h2 style="margin-top: 0;">Memories from the Day</h2>
+        <div class="gallery-grid">
+            <!-- First Image Card -->
+            <div class="image-card">
+                <img src="charity vitu.jpg" alt="Volunteers working together">
+                <div class="image-overlay">
+                    <h4>Serving Our Community</h4>
+                    <p>Volunteers worked tirelessly to prepare and distribute meals with love and care.</p>
+                </div>
+            </div>
 
-  <script>
-    // Modal control
-    function openModal() {
-      document.getElementById("updateModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("updateModal").style.display = "none";
-    }
-    window.onclick = function(event) {
-      if (event.target == document.getElementById("updateModal")) {
-        closeModal();
-      }
-    }
+            <!-- Second Image Card -->
+            <div class="image-card">
+                <img src="charity wazee.jpg" alt="Donated goods">
+                <div class="image-overlay">
+                    <h4>Generosity in Action</h4>
+                    <p>A glimpse of the immense number of clothing and food items collected from our kind donors.</p>
+                </div>
+            </div>
 
-    // Gallery pause/resume
-    const gallery = document.getElementById("galleryTrack");
+            <!-- Third Image Card -->
+            <div class="image-card">
+                <img src="charity.jpg" alt="Health clinic">
+                <div class="image-overlay">
+                    <h4>Compassionate Care</h4>
+                    <p>Our medical team provided free health check-ups, showing genuine care for those in need.</p>
+                </div>
+            </div>
 
-    gallery.addEventListener("mouseenter", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("mouseleave", () => {
-      gallery.style.animationPlayState = "running";
-    });
-    gallery.addEventListener("touchstart", () => {
-      gallery.style.animationPlayState = "paused";
-    });
-    gallery.addEventListener("touchend", () => {
-      gallery.style.animationPlayState = "running";
-    });
-  </script>
+            <!-- Fourth Image Card -->
+            <div class="image-card">
+                <img src="charity1.jpg" alt="People smiling">
+                <div class="image-overlay">
+                    <h4>The Power of Unity</h4>
+                    <p>The day was filled with smiles and hope, showcasing the strength of our community when we unite for a cause.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 God's Prayer Squad.   All rights are reserved!!<br> &copy;Designed by Alhan<br>
+        <a href="tel:+255699889376">+255699889376</a> / <a href="tel:+255750589376">+255750589376</a><br>
+        <a href="mailto:alhanh52@gmail.com">alhanh52@gmail.com</a><br>
+     
+    </footer>
 
 </body>
+
 </html>
