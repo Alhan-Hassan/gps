@@ -4,183 +4,236 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>God's Prayer Squad</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <!-- Vanilla Tilt.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <style>
-        /* General Styles and Background Gradient */
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f0f2f5 0%, #c1d5e0 100%);
-            color: #333;
+            background: #0a0a23;
+            color: #e0e7ff;
             line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 80px 20px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            scroll-behavior: smooth;
+            position: relative;
         }
 
-        /* Page Title with Heading Font */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Page Title with Typing Animation */
         .page-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Orbitron', sans-serif;
             text-align: center;
             font-size: 3.5em;
-            color: #1a4269;
-            margin-bottom: 50px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: fadeInDown 1s ease-in-out;
+            color: #00f6ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #00f6ff;
+            width: fit-content;
         }
 
-        /* Styling for the new HR tag */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00f6ff; }
+        }
+
+        /* Styling for the HR tag */
         .title-separator {
             width: 50%;
-            height: 3px; /* Thickness of the line */
-            background-color: #007bff; /* Color of the line */
-            border: none; /* Remove default border */
-            margin: 20px auto 40px; /* Center the line and add space */
+            height: 3px;
+            background: linear-gradient(90deg, #00f6ff, #ff00cc);
+            border: none;
+            margin: 20px auto 40px;
+            animation: gradient-flow 4s linear infinite;
         }
-        
-        /* Profile Container with Hover Effect */
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Profile Container with Glassmorphism */
         .profile-container {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
             max-width: 800px;
             width: 100%;
             margin-bottom: 40px;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border-left: 5px solid #007bff;
             animation: fadeInUp 1s ease-in-out;
+            position: relative;
         }
 
         .profile-container:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 12px 25px rgba(0, 255, 255, 0.3);
         }
 
-        /* Profile Header with Flexbox and Alignment */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00f6ff, #ff00cc, #00f6ff);
+            z-index: -1;
+            filter: blur(5px);
+            animation: gradient-flow 4s linear infinite;
+        }
+
+        /* Profile Header */
         .profile-header {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            border-bottom: 2px dashed #e0e0e0;
+            border-bottom: 2px dashed rgba(0, 255, 255, 0.3);
             padding-bottom: 20px;
         }
 
-        /* Profile Picture with a more pronounced border */
         .profile-pic {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
             margin-right: 20px;
-            border: 5px solid #007bff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease-in-out;
+            border: 5px solid #00f6ff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .profile-pic:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
         }
 
         .profile-info h1 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.2em;
-            color: #1a4269;
+            color: #00f6ff;
             margin: 0;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
         .profile-info p {
             margin: 5px 0 0;
-            color: #666;
+            color: #e0e7ff;
             font-style: italic;
         }
 
-        /* Collapsible Section Details */
+        /* Collapsible Section */
         details {
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
-            background-color: #fafafa;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
             margin-top: 20px;
             transition: all 0.3s ease-in-out;
+            animation: neon-pulse 2s ease-in-out infinite;
         }
 
         summary {
             font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            color: #007bff;
+            color: #00f6ff;
             outline: none;
-            transition: color 0.3s;
-            list-style: none; /* Hide default arrow */
+            list-style: none;
             position: relative;
+            transition: color 0.3s;
         }
 
         summary:before {
-            content: '+ '; /* Custom plus sign */
+            content: '+ ';
             margin-right: 10px;
             font-size: 1.5em;
-            color: #007bff;
+            color: #00f6ff;
             transition: transform 0.3s;
         }
 
         details[open] summary:before {
-            content: '- '; /* Custom minus sign */
+            content: '- ';
         }
-        
+
         details:hover summary {
-            color: #0056b3;
+            color: #ff00cc;
             text-decoration: underline;
         }
 
         .testimony-content {
             padding-top: 20px;
-            border-top: 1px dashed #e0e0e0;
-        }
-        
-        /* Styling for the HR tags inside the testimony content */
-        .testimony-content hr {
-            height: 2px;
-            background-color: #007bff;
-            border: none;
-            margin: 10px 0;
+            border-top: 1px dashed rgba(0, 255, 255, 0.3);
+            color: #e0e7ff;
         }
 
-        /* Subtle Animations */
+        .testimony-content hr {
+            height: 2px;
+            background: linear-gradient(90deg, #00f6ff, #ff00cc);
+            border: none;
+            margin: 10px 0;
+            animation: gradient-flow 4s linear infinite;
+        }
+
+        /* Animations */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-          /* --- Fixed Header --- */
+        @keyframes neon-pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.3); }
+        }
+
+        /* Fixed Header */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #1a237e;
+            background: rgba(26, 35, 126, 0.8);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 20px 0;
             text-align: center;
             z-index: 100;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
         }
 
         header .logo-container {
@@ -195,24 +248,29 @@
             height: 50px;
             border-radius: 50%;
             margin-right: 25px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
         header .logo-container img:hover {
             transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
         header .logo-container .logo-text {
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5em;
             font-weight: bold;
             color: #ffb74d;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
-
     </style>
 </head>
 <body>
-     <header>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <header>
         <div class="logo-container">
             <img src="https://placehold.co/50x50/1a237e/ffffff?text=GPS" alt="God's Prayer Squad Logo">
             <div class="logo-text">God's Prayer Squad</div>
@@ -220,13 +278,14 @@
     </header>
 
     <h1 class="page-title">Testimonies of Transformation</h1>
-    <hr class="title-separator"> <div class="profile-container">
+    <hr class="title-separator">
+
+    <div class="profile-container tilt-card">
         <div class="profile-header">
             <img src="kiribuche.jpg" alt="Profile of Alex P." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Neema</h1>
-                <p>Joined GPS: october 2024</p>
-                
+                <p>Joined GPS: October 2024</p>
             </div>
         </div>
         <details>
@@ -234,14 +293,14 @@
             <div class="testimony-content">
                 Happy GPS Day!<br>
                 <hr>
-                "Through GPS, I have experience God's presence guiding me along the right paths in life. He has given me the strength to pray and seek Him in spirit and in truth."
+                "Through GPS, I have experienced God's presence guiding me along the right paths in life. He has given me the strength to pray and seek Him in spirit and in truth."
             </div>
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of Maria S." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of Maria S." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Antidius</h1>
                 <p>Joined GPS: March 2025</p>
@@ -257,9 +316,9 @@
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of David R." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of David R." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Noel</h1>
                 <p>Joined GPS: January 2025</p>
@@ -275,9 +334,9 @@
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of Jessica B." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of Jessica B." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Happy</h1>
                 <p>Joined GPS: October 2024</p>
@@ -293,9 +352,9 @@
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of Robert T." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of Robert T." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Dorcus</h1>
                 <p>Joined GPS: October 2023</p>
@@ -311,9 +370,9 @@
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of Sophia L." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of Sophia L." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Patricia</h1>
                 <p>Joined GPS: November 2023</p>
@@ -329,9 +388,9 @@
         </details>
     </div>
 
-    <div class="profile-container">
+    <div class="profile-container tilt-card">
         <div class="profile-header">
-            <img src=""kiribuche.jpg" alt="Profile of Chris M." class="profile-pic">
+            <img src="kiribuche.jpg" alt="Profile of Chris M." class="profile-pic">
             <div class="profile-info">
                 <h1>Squad: Einoth</h1>
                 <p>Joined GPS: May 2024</p>
@@ -346,6 +405,36 @@
             </div>
         </details>
     </div>
-</body>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: ['#00f6ff', '#ff00cc', '#ffffff'] },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    line_linked: { enable: true, distance: 150, color: '#00f6ff', opacity: 0.4, width: 1 },
+                    move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out' }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
+                    modes: { repulse: { distance: 100 }, push: { particles_nb: 4 } }
+                },
+                retina_detect: true
+            });
+
+            // Initialize Vanilla Tilt.js for 3D tilt effect
+            VanillaTilt.init(document.querySelectorAll('.tilt-card'), {
+                max: 15,
+                speed: 400,
+                glare: true,
+                'max-glare': 0.3
+            });
+        });
+    </script>
+</body>
 </html>
