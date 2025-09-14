@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Ministries Testimonies - Enhanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles and Background Gradient */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #c1d5e0 100%);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Page Title with Heading Font */
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3.5em;
+            color: #1a4269;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        /* Styling for the new HR tag */
+        .title-separator {
+            width: 50%;
+            height: 3px; /* Thickness of the line */
+            background-color: #007bff; /* Color of the line */
+            border: none; /* Remove default border */
+            margin: 20px auto 40px; /* Center the line and add space */
+        }
+        
+        /* Profile Container with Hover Effect */
+        .profile-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-left: 5px solid #007bff;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .profile-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Profile Header with Flexbox and Alignment */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px dashed #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        /* Profile Picture with a more pronounced border */
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 5px solid #007bff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: #1a4269;
+            margin: 0;
+        }
+
+        .profile-info p {
+            margin: 5px 0 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Collapsible Section Details */
+        details {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fafafa;
+            margin-top: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        summary {
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            color: #007bff;
+            outline: none;
+            transition: color 0.3s;
+            list-style: none; /* Hide default arrow */
+            position: relative;
+        }
+
+        summary:before {
+            content: '+ '; /* Custom plus sign */
+            margin-right: 10px;
+            font-size: 1.5em;
+            color: #007bff;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary:before {
+            content: '- '; /* Custom minus sign */
+        }
+        
+        details:hover summary {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .testimony-content {
+            padding-top: 20px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        
+        /* Styling for the HR tags inside the testimony content */
+        .testimony-content hr {
+            height: 2px;
+            background-color: #007bff;
+            border: none;
+            margin: 10px 0;
+        }
+
+        /* Subtle Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+          /* --- Fixed Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a237e;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100;
+        }
+
+        header .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        header .logo-container img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        header .logo-container img:hover {
+            transform: scale(1.1);
+        }
+
+        header .logo-container .logo-text {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ffb74d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+     <header>
+        <div class="logo-container">
+            <img src="https://placehold.co/50x50/1a237e/ffffff?text=GPS" alt="God's Prayer Squad Logo">
+            <div class="logo-text">God's Prayer Squad</div>
+        </div>
+    </header>
+
+    <h1 class="page-title">Testimonies of Transformation</h1>
+    <hr class="title-separator"> <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Alex P." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Neema</h1>
+                <p>Joined GPS: october 2024</p>
+                
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "Through GPS, I have experience God's presence guiding me along the right paths in life. He has given me the strength to pray and seek Him in spirit and in truth."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Maria S." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Antidius</h1>
+                <p>Joined GPS: March 2025</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "Shalom! I'm so proud to be a member of the GPS family. Through GPS, I have experienced countless increases in my prayer life, my mindset, my love for fellow human beings, and my love for God. Truly, I am grateful to be part of this family, and I believe I will continue to grow and experience greater things through it."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of David R." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Noel</h1>
+                <p>Joined GPS: January 2025</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "I thank the Almighty God for the great opportunity of meeting the family of GPS. Back in the days, I was lost and forgot God's purpose upon my life. But much thanks to GPS family. Because through it, I have found the right way. I got to know God, and I keep on growing in all counsels to learn more about the things of God. I'm so grateful to GPS family and I'm now a member of God's praying SQUAD."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Jessica B." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Happy</h1>
+                <p>Joined GPS: October 2024</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "The GPS family has helped me become someone I never was before by building courage within me even to the point of standing confidently in front of people and speaking. Since joining, this family has helped to increase my reward, and my level of faith has grown stronger. Truly, my conduct and way of thinking has been transformed, and I have gained more knowledge and wisdom. I continue to grow and learn more with each passing day."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Robert T." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Dorcus</h1>
+                <p>Joined GPS: October 2023</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "Since I met the GPS family, many things have happened in my life and are still happening. I learned and I am still learning wisdom found in GPS through its teaching and motivational missions. I have also grown in understanding, Agave love, caring, spiritual dimensions and many other areas."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Sophia L." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Patricia</h1>
+                <p>Joined GPS: November 2023</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "Through GPS, God has increased me in many areas of my life, especially in prayer, studying, and understanding His word. I have also discovered my purpose, and in my every day life, I have learned how to live well, communicate, cooperate, and share ideas with different people. I think God for placing me in the GPS family, and I believe He will continue to transform and bless me through this wonderful community."
+            </div>
+        </details>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/120" alt="Profile of Chris M." class="profile-pic">
+            <div class="profile-info">
+                <h1>Squad: Einoth</h1>
+                <p>Joined GPS: May 2024</p>
+            </div>
+        </div>
+        <details>
+            <summary>Read Full Testimony</summary>
+            <div class="testimony-content">
+                Happy GPS Day!<br>
+                <hr>
+                "I thank God for giving me the grace to be part of wonderful GPS family. Through GPS, my life has changed significantly, my understanding of the word of God has deepened, my prayer life has grown stronger, and my perspective has been transformed to be much more positive. I truly love this family, and I'm growing every single day because of it."
+            </div>
+        </details>
+    </div>
+</body>
+</html>
