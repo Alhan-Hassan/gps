@@ -20,7 +20,7 @@
             color: #e0e7ff;
             line-height: 1.6;
             margin: 0;
-            padding: 80px 20px 40px;
+            padding: 60px 10px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -41,15 +41,20 @@
         .page-title {
             font-family: 'Orbitron', sans-serif;
             text-align: center;
-            font-size: 3.5em;
+            font-size: 2em;
             color: #00f6ff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            margin-bottom: 10px;
             animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
             white-space: nowrap;
             overflow: hidden;
             border-right: 3px solid #00f6ff;
             width: fit-content;
+        }
+
+        @media (max-width: 320px) {
+            .page-title {
+                font-size: 1.5em;
+            }
         }
 
         @keyframes typing {
@@ -65,10 +70,10 @@
         /* Styling for the HR tag */
         .title-separator {
             width: 50%;
-            height: 3px;
+            height: 2px;
             background: linear-gradient(90deg, #00f6ff, #ff00cc);
             border: none;
-            margin: 20px auto 40px;
+            margin: 10px auto 20px;
             animation: gradient-flow 4s linear infinite;
         }
 
@@ -82,89 +87,94 @@
         .profile-container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(12px);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
             max-width: 800px;
             width: 100%;
-            margin-bottom: 40px;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease-in-out;
             animation: fadeInUp 1s ease-in-out;
-            position: relative;
         }
 
         .profile-container:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 25px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
         }
 
-        .profile-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00f6ff, #ff00cc, #00f6ff);
-            z-index: -1;
-            filter: blur(5px);
-            animation: gradient-flow 4s linear infinite;
+        @media (max-width: 320px) {
+            .profile-container {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
         }
 
         /* Profile Header */
         .profile-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px dashed rgba(0, 255, 255, 0.3);
-            padding-bottom: 20px;
+            padding-bottom: 15px;
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 20px;
-            border: 5px solid #00f6ff;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            margin-right: 15px;
+            border: 3px solid #00f6ff;
+            transition: transform 0.3s ease-in-out;
         }
 
         .profile-pic:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        @media (max-width: 320px) {
+            .profile-pic {
+                width: 60px;
+                height: 60px;
+                border: 2px solid #00f6ff;
+            }
         }
 
         .profile-info h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2em;
+            font-size: 1.5em;
             color: #00f6ff;
             margin: 0;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
         }
 
         .profile-info p {
             margin: 5px 0 0;
             color: #e0e7ff;
             font-style: italic;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 320px) {
+            .profile-info h1 {
+                font-size: 1.2em;
+            }
+            .profile-info p {
+                font-size: 0.8em;
+            }
         }
 
         /* Collapsible Section */
         details {
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(8px);
-            margin-top: 20px;
+            margin-top: 15px;
             transition: all 0.3s ease-in-out;
-            animation: neon-pulse 2s ease-in-out infinite;
         }
 
         summary {
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: bold;
             cursor: pointer;
             color: #00f6ff;
@@ -176,8 +186,8 @@
 
         summary:before {
             content: '+ ';
-            margin-right: 10px;
-            font-size: 1.5em;
+            margin-right: 8px;
+            font-size: 1.2em;
             color: #00f6ff;
             transition: transform 0.3s;
         }
@@ -192,17 +202,31 @@
         }
 
         .testimony-content {
-            padding-top: 20px;
+            padding-top: 15px;
             border-top: 1px dashed rgba(0, 255, 255, 0.3);
             color: #e0e7ff;
+            font-size: 0.9em;
         }
 
         .testimony-content hr {
             height: 2px;
             background: linear-gradient(90deg, #00f6ff, #ff00cc);
             border: none;
-            margin: 10px 0;
+            margin: 8px 0;
             animation: gradient-flow 4s linear infinite;
+        }
+
+        @media (max-width: 320px) {
+            details {
+                padding: 10px;
+                margin-top: 10px;
+            }
+            summary {
+                font-size: 1em;
+            }
+            .testimony-content {
+                font-size: 0.8em;
+            }
         }
 
         /* Animations */
@@ -216,11 +240,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes neon-pulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.2); }
-            50% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.3); }
-        }
-
         /* Fixed Header */
         header {
             position: fixed;
@@ -230,39 +249,48 @@
             background: rgba(26, 35, 126, 0.8);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 20px 0;
+            padding: 15px 0;
             text-align: center;
             z-index: 100;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
         }
 
         header .logo-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 20px;
+            padding: 0 10px;
         }
 
         header .logo-container img {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            margin-right: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            margin-right: 15px;
+            transition: transform 0.3s ease;
         }
 
         header .logo-container img:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
         }
 
         header .logo-container .logo-text {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #ffb74d;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        @media (max-width: 320px) {
+            header {
+                padding: 10px 0;
+            }
+            header .logo-container img {
+                width: 30px;
+                height: 30px;
+            }
+            header .logo-container .logo-text {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
@@ -277,7 +305,7 @@
         </div>
     </header>
 
-    <h1 class="page-title">Testimonies of Transformation</h1>
+    <h1 class="page-title text-4xl md:text-5xl">Testimonies of Transformation</h1>
     <hr class="title-separator">
 
     <div class="profile-container tilt-card">
