@@ -2,1177 +2,573 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bible Versions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Growth Through Prayer and Fasting</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <!-- Particles.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7dd3fc;
+            --gradient-bg: linear-gradient(135deg, #2563eb, #7dd3fc);
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            background: #ecf0f1;
-            color: #2c3e50;
-            line-height: 1.6;
-            padding-top: 120px;
-            position: relative;
+            transition: background-color 0.3s, color 0.3s;
         }
-
-        #particles-js {
+        .message-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.8;
-        }
-
-        /* Gradient Overlay for Background */
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(231, 76, 60, 0.2));
-            z-index: -1;
-        }
-
-        /* Fixed Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #2c3e50;
-            color: #ffffff;
-            padding: 15px 20px;
-            text-align: center;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-logo-text {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 2.2em;
-            font-weight: 600;
-            color: #3498db;
-            flex: 1;
-            text-align: center;
-            margin: 0;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-        .header-logo-text:hover {
-            color: #2980b9;
-            text-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
-        }
-
-        .gps-circle {
-            width: 60px;
-            height: 60px;
-            border: 2px dashed #3498db;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 20px;
-            animation: shine 2s ease-in-out infinite;
-        }
-
-        .gps-circle span {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-        }
-
-        .gps-logo {
-            background: #ffffff;
-            border-radius: 50%;
-            padding: 5px;
-            margin-right: 20px;
-        }
-
-        .gps-logo img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gps-logo img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
-        }
-
-        @keyframes shine {
-            0%, 100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
-            50% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.8); }
-        }
-
-        nav {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            background: #3498db;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        nav ul li a {
-            display: block;
-            color: #ffffff;
-            padding: 12px 15px;
-            text-decoration: none;
-            font-size: 1em;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background: #2980b9;
-            transform: scale(1.05);
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Daily Verse Section */
-        .daily-verse {
-            text-align: center;
-            padding: 60px 15px;
-            background: #2c3e50;
-            color: #ffffff;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .daily-verse::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            animation: glowing-border 3s linear infinite;
-        }
-
-        .daily-verse h2 {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 2em;
-            margin-bottom: 15px;
-            color: #3498db;
-        }
-
-        #verse-text {
-            font-family: 'Open Sans', sans-serif;
-            font-size: 1.5em;
-            font-style: italic;
-            margin-bottom: 10px;
-            color: #ffffff;
-            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite, color-pulse 6s ease-in-out infinite;
-            white-space: normal;
-            overflow: hidden;
-            border-right: 3px solid #ffffff;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        #verse-reference {
-            font-size: 1.2em;
-            color: #e74c3c;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #ffffff; }
-        }
-
-        @keyframes color-pulse {
-            0% { color: #3498db; }
-            33% { color: #e74c3c; }
-            66% { color: #ffffff; }
-            100% { color: #3498db; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glowing-border {
-            0% { border-color: rgba(52, 152, 219, 0.5); }
-            50% { border-color: rgba(231, 76, 60, 0.5); }
-            100% { border-color: rgba(52, 152, 219, 0.5); }
-        }
-
-        /* Bible Versions Section */
-        main {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .bible-card {
-            background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, rotate 0.3s ease;
-        }
-
-        .bible-card:hover {
-            transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
-        }
-
-        .bible-card a {
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .bible-card a:hover {
-            transform: scale(1.05);
-        }
-
-        /* Chat Section */
-        .chat-section {
-            background: #2c3e50;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .chat-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            animation: glowing-border 3s linear infinite;
-        }
-
-        #chat-messages {
-            background: linear-gradient(135deg, #1a252f, #2c3e50);
-            border-radius: 8px;
-            padding: 15px;
-            position: relative;
-        }
-
-        #chat-messages > div {
-            animation: slideIn 0.5s ease-out;
-            position: relative;
-        }
-
-        .message-timestamp {
-            font-size: 0.75em;
-            color: #a0aec0;
-            margin-top: 4px;
-        }
-
-        .delete-message-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #e74c3c;
-            color: #ffffff;
-            border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            transition: all 0.5s ease-in-out;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
         }
-
-        #chat-messages > div:hover .delete-message-btn {
+        .message-container.active {
             opacity: 1;
+            bottom: 40px;
+            pointer-events: auto;
         }
-
-        .typing-indicator {
-            font-size: 0.9em;
-            color: #a0aec0;
+        .popup-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
             text-align: center;
-            display: none;
-            animation: pulse 1.5s infinite;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .popup-message.active {
+            opacity: 1;
+            pointer-events: auto;
         }
-
-        #chat-input:focus {
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+        .dark-mode .popup-message {
+            background: rgba(45, 55, 72, 0.95);
+            color: #e2e8f0;
         }
-
-        #character-counter {
-            font-size: 0.9em;
-            color: #a0aec0;
-            text-align: right;
-            margin-top: 4px;
-        }
-
-        #scroll-to-bottom {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: #3498db;
-            color: #ffffff;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        #scroll-to-bottom:hover {
-            background: #2980b9;
-            transform: scale(1.1);
-        }
-
-        #clear-chat-btn {
-            background: #e74c3c;
-            color: #ffffff;
-            font-weight: bold;
-            padding: 8px 16px;
+        .popup-message button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
             border-radius: 8px;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.2s;
         }
-
-        #clear-chat-btn:hover {
-            background: #c0392b;
-            transform: scale(1.05);
+        .popup-message button:hover {
+            background: var(--secondary-color);
         }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
         }
-
-        #chat-form button, #chat-form label {
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        .dark-mode .bg-white {
+            background-color: #2d3748;
         }
-
-        #chat-form button:hover, #chat-form label:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(231, 76, 60, 0.7);
+        .dark-mode .text-gray-700 {
+            color: #e2e8f0;
         }
-
-        /* Decorative Divider */
-        .section-divider {
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, #3498db, #e74c3c);
-            margin: 20px auto;
-            animation: gradient-flow 4s linear infinite;
+        .dark-mode .bg-blue-600 {
+            background-color: #2b6cb0;
         }
-
-        @keyframes gradient-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .dark-mode .text-blue-800 {
+            color: #63b3ed;
         }
-
-        /* Media Section */
-        .media {
-            text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: #ffffff;
-            margin-top: 20px;
+        .dark-mode .border-gray-300 {
+            border-color: #4a5568;
         }
-
-        .media a {
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 1.5em;
-            margin: 0 10px;
-            transition: color 0.3s ease, transform 0.3s ease;
+        .dark-mode .bg-gray-100 {
+            background-color: #1a202c;
         }
-
-        .media a:hover {
-            color: #e74c3c;
+        .dark-mode .text-gray-500 {
+            color: #a0aec0;
+        }
+        .dark-mode .bg-gray-500 {
+            background-color: #4a5568;
+        }
+        .dark-mode .hover\:bg-gray-500:hover {
+            background-color: #718096;
+        }
+        .dark-mode .bg-blue-700 {
+            background-color: #1e40af;
+        }
+        .dark-mode .hover\:bg-blue-700:hover {
+            background-color: #2563eb;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .glass-effect {
+            background: rgba(45, 55, 72, 0.3);
+            border: 1px solid rgba(160, 174, 192, 0.2);
+        }
+        .section-gradient {
+            background: var(--gradient-bg);
+            transition: background 0.5s;
+        }
+        .btn-hover {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .card-hover {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .theme-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .theme-btn:hover {
             transform: scale(1.2);
         }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            color: #ffffff;
-            padding: 20px;
-            background: #2c3e50;
-            margin-top: 40px;
-            position: relative;
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
         }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, #3498db, #e74c3c);
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-            animation: gradient-flow 4s linear infinite;
-        }
-
-        footer p {
-            color: #3498db;
-            margin: 5px 0;
-        }
-
-        /* Pop-up Styles */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .progress-bar-fill {
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
+            background: var(--primary-color);
+            transition: width 0.5s ease-in-out;
+        }
+        .verse-carousel {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+            z-index: 10; /* Ensure carousel is on its own layer */
+            display: flex;
             align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
         }
-
-        .popup-content {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            transform: scale(0.8);
-            transition: transform 0.3s ease-out, box-shadow 0.3s ease;
+        .dark-mode .verse-carousel {
+            background: rgba(45, 55, 72, 0.2);
         }
-
-        .popup-overlay.active .popup-content {
-            transform: scale(1);
-            box-shadow: 0 8px 16px rgba(52, 152, 219, 0.3);
+        .verse-container {
+            display: flex;
+            animation: slide 60s infinite steps(5, end); /* 12 seconds per verse */
+            white-space: nowrap;
         }
-
-        .popup-close-btn {
-            background: #e74c3c;
-            color: #ffffff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s ease, transform 0.3s ease;
+        .verse-item {
+            flex: 0 0 auto;
+            width: 600px; /* Fixed width to ensure full visibility */
+            padding: 1rem;
+            font-size: 1.25rem;
+            color: #1e40af;
+            font-style: italic;
+            text-align: left;
+            white-space: normal; /* Allow text wrapping within item */
         }
-
-        .popup-close-btn:hover {
-            background: #c0392b;
-            transform: scale(1.05);
+        .dark-mode .verse-item {
+            color: #63b3ed;
         }
-
-        /* Responsive Adjustments */
-        @media (max-width: 320px) {
-            body {
-                padding-top: 100px;
-            }
-
-            header {
-                padding: 10px 15px;
-            }
-
-            .header-logo-text {
-                font-size: 1.5em;
-            }
-
-            .gps-circle {
-                width: 40px;
-                height: 40px;
-                margin-left: 10px;
-            }
-
-            .gps-circle span {
-                font-size: 0.9em;
-            }
-
-            .gps-logo {
-                padding: 3px;
-                margin-right: 10px;
-            }
-
-            .gps-logo img {
-                width: 100px;
-                height: 70px;
-            }
-
-            nav {
-                top: 60px;
-            }
-
-            nav ul li a {
-                padding: 10px 12px;
-                font-size: 0.9em;
-            }
-
-            .daily-verse {
-                padding: 40px 10px;
-            }
-
-            .daily-verse h2 {
-                font-size: 1.5em;
-            }
-
-            #verse-text {
-                font-size: 1.2em;
-            }
-
-            #verse-reference {
-                font-size: 1em;
-            }
-
-            .bible-card {
-                padding: 15px;
-            }
-
-            .bible-card h3 {
-                font-size: 1.5em;
-            }
-
-            .chat-section {
-                padding: 15px;
-            }
-
-            #chat-messages {
-                height: 200px;
-            }
-
-            #chat-form {
-                flex-direction: column;
-            }
-
-            #scroll-to-bottom {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8em;
-            }
-
-            .media a {
-                font-size: 1.2em;
-                margin: 0 5px;
-            }
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(0); } /* Pause at first verse */
+            25% { transform: translateX(-600px); } /* Move to second */
+            45% { transform: translateX(-600px); } /* Pause at second */
+            50% { transform: translateX(-1200px); } /* Move to third */
+            70% { transform: translateX(-1200px); } /* Pause at third */
+            75% { transform: translateX(-1800px); } /* Move to fourth */
+            95% { transform: translateX(-1800px); } /* Pause at fourth */
+            100% { transform: translateX(-2400px); } /* Move to fifth */
+        }
+        .verse-container:hover {
+            animation-play-state: paused;
         }
     </style>
 </head>
-<body>
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    <div class="bg-overlay"></div>
+<body class="bg-gray-100 text-gray-800">
+    <script type="module">
+        // Simple UUID generator for local user ID
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
 
-    <header>
-        <div class="gps-circle">
-            <span>GPS</span>
-        </div>
-        <h1 class="header-logo-text">God's Prayer Squad</h1>
-        <div class="gps-logo">
-            <img src="gps logo.png" alt="GPS Logo">
+        // Load or generate user ID
+        let userId = localStorage.getItem('prayerAppUserId');
+        if (!userId) {
+            userId = generateUUID();
+            localStorage.setItem('prayerAppUserId', userId);
+        }
+
+        // Function to show temporary messages
+        function showMessage(text, isError = false) {
+            const messageEl = document.getElementById('message-box');
+            if (!messageEl) return;
+            messageEl.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'} mr-2"></i>${text}`;
+            messageEl.className = `message-container active px-6 py-3 rounded-full shadow-lg ${isError ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'}`;
+            setTimeout(() => {
+                messageEl.classList.remove('active');
+            }, 3000);
+        }
+
+        // Function to show persistent popup
+        function showPopupMessage(text) {
+            const popupEl = document.getElementById('popup-message');
+            if (!popupEl) return;
+            popupEl.innerHTML = `
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-clock mr-2 text-lg"></i>
+                    <span>${text}</span>
+                </div>
+                <button id="close-popup" class="btn-hover" aria-label="Close popup">Close</button>
+            `;
+            popupEl.classList.add('active');
+            const closeBtn = document.getElementById('close-popup');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    popupEl.classList.remove('active');
+                });
+            }
+        }
+
+        // Theme Management
+        function setTheme(primaryColor, secondaryColor) {
+            document.documentElement.style.setProperty('--primary-color', primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', secondaryColor);
+            document.documentElement.style.setProperty('--gradient-bg', `linear-gradient(135deg, ${primaryColor}, ${secondaryColor})`);
+            localStorage.setItem('theme', JSON.stringify({ primary: primaryColor, secondary: secondaryColor }));
+        }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            const toggleBtn = document.getElementById('dark-mode-toggle');
+            if (toggleBtn) {
+                toggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i> Light Mode' : '<i class="fas fa-moon"></i> Dark Mode';
+                toggleBtn.setAttribute('aria-pressed', isDarkMode);
+            }
+        }
+
+        // Prayer Timer
+        let timerInterval = null;
+        let timerProgress = 0;
+        let totalSeconds = 0;
+        function startPrayerTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            const startBtn = document.getElementById('start-timer');
+            const stopBtn = document.getElementById('stop-timer');
+            const progressFill = document.getElementById('progress-fill');
+            if (!timerDisplay || !startBtn || !stopBtn || !progressFill) return;
+
+            totalSeconds = 0;
+            startBtn.disabled = true;
+            startBtn.setAttribute('aria-disabled', 'true');
+            stopBtn.disabled = false;
+            stopBtn.setAttribute('aria-disabled', 'false');
+            startBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Praying...';
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                totalSeconds++;
+                timerProgress = Math.min((totalSeconds / 300) * 100, 100); // 5 minutes max
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                progressFill.style.width = `${timerProgress}%`;
+            }, 1000);
+        }
+
+        function stopPrayerTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            const startBtn = document.getElementById('start-timer');
+            const stopBtn = document.getElementById('stop-timer');
+            const progressFill = document.getElementById('progress-fill');
+            if (!timerDisplay || !startBtn || !stopBtn || !progressFill) return;
+
+            clearInterval(timerInterval);
+            timerInterval = null;
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            const timeString = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            showPopupMessage(`Total time prayed: ${timeString}`);
+            timerProgress = 0;
+            totalSeconds = 0;
+            timerDisplay.textContent = '0:00';
+            progressFill.style.width = '0%';
+            startBtn.disabled = false;
+            startBtn.setAttribute('aria-disabled', 'false');
+            stopBtn.disabled = true;
+            stopBtn.setAttribute('aria-disabled', 'true');
+            startBtn.innerHTML = '<i class="fas fa-play mr-2"></i> Start Prayer';
+        }
+
+        // Scroll-to-top
+        function handleScroll() {
+            const scrollBtn = document.getElementById('scroll-to-top');
+            if (!scrollBtn) return;
+            if (window.scrollY > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                const { primary, secondary } = JSON.parse(savedTheme);
+                setTheme(primary, secondary);
+            } else {
+                setTheme('#2563eb', '#7dd3fc');
+            }
+
+            // Load dark mode
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+                const toggleBtn = document.getElementById('dark-mode-toggle');
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+                    toggleBtn.setAttribute('aria-pressed', 'true');
+                }
+            }
+
+            // Setup dark mode toggle
+            const darkToggle = document.getElementById('dark-mode-toggle');
+            if (darkToggle) {
+                darkToggle.addEventListener('click', toggleDarkMode);
+                darkToggle.setAttribute('aria-pressed', document.body.classList.contains('dark-mode'));
+            }
+
+            // Setup theme switchers
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            themeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const primary = btn.dataset.primary;
+                    const secondary = btn.dataset.secondary;
+                    setTheme(primary, secondary);
+                });
+            });
+
+            // Setup prayer timer
+            const startTimer = document.getElementById('start-timer');
+            const stopTimer = document.getElementById('stop-timer');
+            if (startTimer && stopTimer) {
+                startTimer.addEventListener('click', startPrayerTimer);
+                stopTimer.addEventListener('click', stopPrayerTimer);
+                startTimer.setAttribute('aria-disabled', 'false');
+                stopTimer.setAttribute('aria-disabled', 'true');
+            }
+
+            // Setup scroll-to-top
+            const scrollBtn = document.getElementById('scroll-to-top');
+            if (scrollBtn) {
+                scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                window.addEventListener('scroll', handleScroll);
+            }
+
+            // Verse carousel setup
+            const verseContainer = document.querySelector('.verse-container');
+            if (verseContainer) {
+                // Duplicate verses to create seamless loop
+                const verses = verseContainer.querySelectorAll('.verse-item');
+                verses.forEach(verse => {
+                    const clone = verse.cloneNode(true);
+                    verseContainer.appendChild(clone);
+                });
+            }
+
+            // Cleanup
+            window.addEventListener('unload', () => {
+                if (startTimer) startTimer.removeEventListener('click', startPrayerTimer);
+                if (stopTimer) stopTimer.removeEventListener('click', stopPrayerTimer);
+                if (darkToggle) darkToggle.removeEventListener('click', toggleDarkMode);
+                if (scrollBtn) {
+                    scrollBtn.removeEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+                    window.removeEventListener('scroll', handleScroll);
+                }
+                themeButtons.forEach(btn => {
+                    btn.removeEventListener('click', () => {});
+                });
+            });
+        });
+    </script>
+
+    <!-- Header Section -->
+    <header class="section-gradient text-white py-10 shadow-lg transition-colors">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3"><i class="fas fa-pray mr-2"></i> Spiritual Growth Through Prayer and Fasting</h1>
+            <p class="text-lg md:text-xl font-light">Deepen your faith through prayer and fasting.</p>
+            <div class="mt-4 flex justify-center items-center gap-2">
+                <button id="dark-mode-toggle" class="bg-white text-blue-600 font-semibold py-2 px-4 rounded-full shadow-lg hover:bg-gray-200 transition-colors btn-hover" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon mr-2"></i> Dark Mode
+                </button>
+                <div class="flex gap-2">
+                    <button class="theme-btn" data-primary="#2563eb" data-secondary="#7dd3fc" style="background: #2563eb;" aria-label="Blue theme"></button>
+                    <button class="theme-btn" data-primary="#16a34a" data-secondary="#86efac" style="background: #16a34a;" aria-label="Green theme"></button>
+                    <button class="theme-btn" data-primary="#d946ef" data-secondary="#f3d7fa" style="background: #d946ef;" aria-label="Purple theme"></button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a id="visit-btn">Account</a></li>
-            <li><a id="contact-btn">Contact</a></li>
-            <li><a href="bible.html" class="bg-indigo-600">Read Bible</a></li>
-        </ul>
-    </nav>
-
-    <!-- Daily Verse Section -->
-    <section class="daily-verse container mx-auto px-4 mb-12">
-        <h2>Daily Bible Verse</h2>
-        <div id="daily-verse-container" class="italic">
-            <p id="verse-text" class="mb-2">Loading verse...</p>
-            <p id="verse-reference" class="font-semibold"></p>
-        </div>
-    </section>
-
-    <hr class="section-divider">
-    <!-- Verse Search Section -->
-    <section class="verse-search container mx-auto px-4 mb-12">
-        <h2 class="text-2xl font-bold mb-4 text-center text-[#3498db]"><i class="fas fa-search icon-deco"></i> Search Bible Verse</h2>
-        <form id="verse-search-form" class="flex flex-col sm:flex-row gap-4">
-            <input type="text" id="verse-reference-input" placeholder="Enter verse reference (e.g., John 3:16)" required class="flex-grow rounded-full p-3 bg-gray-200 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <select id="language-select" class="rounded-full p-3 bg-gray-200 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="english">English</option>
-                <option value="swahili">Swahili</option>
-            </select>
-            <select id="translation-select" class="rounded-full p-3 bg-gray-200 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option value="kjv">KJV</option>
-                <option value="niv">NIV</option>
-                <option value="nlt">NLT</option>
-                <option value="message">MSG</option>
-            </select>
-            <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300">
-                Search
-            </button>
-        </form>
-        <div id="verse-display" class="mt-8 bg-white p-6 rounded-xl shadow-lg text-center hidden">
-            <p id="searched-verse-text" class="text-lg italic mb-4"></p>
-            <p id="searched-verse-reference" class="font-semibold text-sm text-yellow-300 mb-4"></p>
-            <button id="share-to-chat" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                Share to Chat
-            </button>
-        </div>
-    </section>
-
-    <hr class="section-divider">
     <!-- Main Content Section -->
-    <main class="container mx-auto px-4 py-8">
-        <!-- English Versions Section -->
-        <h2 class="text-3xl font-bold text-center mb-6 text-indigo-800">English Versions</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">King James Version (KJV)</h3>
-                <p class="text-sm text-gray-500 mb-4">Classic & Formal</p>
-                <p class="text-base text-gray-600 mb-6">
-                    A timeless classic known for its elegant, poetic language. It is a very influential translation in the English-speaking world.
+    <main class="container mx-auto px-6 py-12">
+        <!-- Introduction Section -->
+        <section id="introduction" class="mb-16">
+            <h2 class="text-3xl font-bold text-blue-800 text-center mb-6 dark:text-blue-400">The Essence of Prayer and Fasting</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg leading-relaxed text-lg transition-colors glass-effect card-hover">
+                <p class="mb-4">
+                    Prayer and fasting are sacred practices that deepen our connection to God, fostering spiritual discipline and clarity. Prayer is a conversation with the divine, where we express gratitude, seek guidance, and find peace. Fasting complements prayer by focusing our hearts and minds, allowing us to surrender distractions and draw closer to God’s purpose.
                 </p>
-                <a href="https://www.bible.com/bible/1/GEN.1.KJV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Read KJV
-                </a>
-            </div>
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">New International Version (NIV)</h3>
-                <p class="text-sm text-gray-500 mb-4">Modern & Balanced</p>
-                <p class="text-base text-gray-600 mb-6">
-                    A popular, highly readable translation that balances word-for-word accuracy with thought-for-thought clarity.
+                <p>
+                    Together, these practices cultivate resilience, humility, and a stronger faith, helping us align our lives with God’s will, whether in times of joy or challenge.
                 </p>
-                <a href="https://www.bible.com/bible/111/GEN.1.NIV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Read NIV
-                </a>
             </div>
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">New Living Translation (NLT)</h3>
-                <p class="text-sm text-gray-500 mb-4">Easy to Read</p>
-                <p class="text-base text-gray-600 mb-6">
-                    A dynamic translation that is very easy to understand, making it great for new readers and casual study.
-                </p>
-                <a href="https://www.bible.com/bible/116/GEN.1.NLT" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Read NLT
-                </a>
-            </div>
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">The Message (MSG)</h3>
-                <p class="text-sm text-gray-500 mb-4">Contemporary Paraphrase</p>
-                <p class="text-base text-gray-600 mb-6">
-                    A highly contemporary and idiomatic paraphrase of the Bible, designed to bring its meaning to modern readers.
-                </p>
-                <a href="https://www.bible.com/bible/97/GEN.1.MSG" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Read MSG
-                </a>
-            </div>
-        </div>
+        </section>
 
-        <!-- Swahili Versions Section -->
-        <h2 class="text-3xl font-bold text-center mb-6 text-indigo-800">Matoleo ya Kiswahili</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Biblia Takatifu (SUV)</h3>
-                <p class="text-sm text-gray-500 mb-4">Toleo la Muungano</p>
-                <p class="text-base text-gray-600 mb-6">
-                    Tafsiri ya Kiswahili inayotumika sana na maarufu. Ni toleo linalopendelewa na Wakristo wengi wanaozungumza Kiswahili.
-                </p>
-                <a href="https://www.bible.com/bible/1824/GEN.1.SUV" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Soma SUV
-                </a>
+        <!-- Benefits Section -->
+        <section id="benefits" class="mb-16">
+            <h2 class="text-3xl font-bold text-blue-800 text-center mb-6 dark:text-blue-400">Benefits of Prayer and Fasting</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg transition-colors card-hover">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-3 dark:text-blue-300"><i class="fas fa-heart mr-2"></i> Spiritual Discipline</h3>
+                    <p class="text-lg leading-relaxed">
+                        Fasting and prayer build discipline, teaching us to prioritize spiritual growth over physical desires and strengthening our commitment to faith.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg transition-colors card-hover">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-3 dark:text-blue-300"><i class="fas fa-pray mr-2"></i> Deeper Connection</h3>
+                    <p class="text-lg leading-relaxed">
+                        Combining prayer with fasting intensifies our focus on God, fostering a profound sense of closeness and alignment with His will.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg transition-colors card-hover">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-3 dark:text-blue-300"><i class="fas fa-shield-alt mr-2"></i> Emotional Clarity</h3>
+                    <p class="text-lg leading-relaxed">
+                        Fasting clears mental clutter, while prayer provides emotional strength, helping us face challenges with renewed hope and perspective.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg transition-colors card-hover">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-3 dark:text-blue-300"><i class="fas fa-lightbulb mr-2"></i> Divine Guidance</h3>
+                    <p class="text-lg leading-relaxed">
+                        Through fasting and prayer, we seek God’s wisdom, gaining clarity to make decisions that reflect His purpose for our lives.
+                    </p>
+                </div>
             </div>
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Neno: Biblia Takatifu</h3>
-                <p class="text-sm text-gray-500 mb-4">Kiswahili cha Kisasa</p>
-                <p class="text-base text-gray-600 mb-6">
-                    Tafsiri ya Kiswahili ya kisasa inayotumia lugha ya sasa, ambayo inafanya iwe rahisi kusoma na kueleweka.
-                </p>
-                <a href="https://www.bible.com/bible/1825/GEN.1.NEN" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Soma Neno
-                </a>
+        </section>
+
+        <!-- Prayer Timer Section -->
+        <section id="prayer-timer" class="mb-16">
+            <h2 class="text-3xl font-bold text-blue-800 text-center mb-6 dark:text-blue-400">Prayer Timer</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-md mx-auto text-center transition-colors glass-effect card-hover">
+                <div id="timer-display" class="text-4xl font-mono text-blue-600 mb-4 dark:text-blue-400" aria-live="polite">0:00</div>
+                <div class="progress-bar mb-4">
+                    <div id="progress-fill" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <button id="start-timer" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-blue-700 transition-colors mr-2 btn-hover" aria-label="Start prayer timer">
+                    <i class="fas fa-play mr-2"></i> Start Prayer
+                </button>
+                <button id="stop-timer" class="bg-gray-500 text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-gray-600 transition-colors btn-hover" disabled aria-label="Stop prayer timer" aria-disabled="true">
+                    <i class="fas fa-stop mr-2"></i> Stop Prayer
+                </button>
             </div>
-            <div class="bible-card p-6 flex flex-col items-center text-center">
-                <h3 class="text-2xl font-bold text-indigo-700 mb-2">Biblia Habari Njema</h3>
-                <p class="text-sm text-gray-500 mb-4">Tafsiri ya Habari Njema</p>
-                <p class="text-base text-gray-600 mb-6">
-                    Tafsiri ya Kiswahili inayolenga lugha rahisi na ya asili, iliyoundwa kwa ajili ya uelewa rahisi.
-                </p>
-                <a href="https://www.bible.com/bible/563/GEN.1.BHN" target="_blank" rel="noopener noreferrer" class="bg-yellow-500 text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition-colors">
-                    Soma BHN
-                </a>
+        </section>
+
+        <!-- Fasting and Prayer Section -->
+        <section id="fasting-prayer" class="mb-16">
+            <h2 class="text-3xl font-bold text-blue-800 text-center mb-6 dark:text-blue-400">Fasting and Prayer Practices</h2>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto transition-colors glass-effect card-hover">
+                <div class="mb-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                    Your User ID is: <span id="user-id" class="font-mono text-gray-700 dark:text-gray-300">Loading...</span>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2 dark:text-gray-200"><i class="fas fa-pray mr-2"></i> Types of Fasts</h3>
+                        <p class="text-lg leading-relaxed">
+                            Fasting can take many forms, such as a complete fast (abstaining from all food and drink for a set period), a partial fast (limiting certain foods), or a Daniel fast (eating only fruits, vegetables, and water). Choose a fast that aligns with your health and spiritual goals.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2 dark:text-gray-200"><i class="fas fa-clock mr-2"></i> Fasting Duration</h3>
+                        <p class="text-lg leading-relaxed">
+                            Fasts can last from a single meal to several days. Common durations include 24-hour fasts, sunrise-to-sunset fasts, or extended fasts for specific spiritual purposes. Always consult a healthcare professional before extended fasting.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2 dark:text-gray-200"><i class="fas fa-book mr-2"></i> Combining with Prayer</h3>
+                        <p class="text-lg leading-relaxed">
+                            Fasting is most effective when paired with intentional prayer. Set aside specific times to pray, meditate on scripture, and seek God’s guidance. Use the prayer timer above to structure your prayer sessions during your fast.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2 dark:text-gray-200"><i class="fas fa-heart mr-2"></i> Spiritual Benefits</h3>
+                        <p class="text-lg leading-relaxed">
+                            Fasting and prayer help us humble ourselves before God, increase our spiritual sensitivity, and open our hearts to divine revelation. These practices can lead to breakthroughs in personal growth, relationships, and faith.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-2 dark:text-gray-200"><i class="fas fa-bible mr-2"></i> Bible Verses on Fasting and Prayer</h3>
+                        <div class="verse-carousel">
+                            <div class="verse-container">
+                                <div class="verse-item">"But when you fast, put oil on your head and wash your face, so that it will not be obvious to others that you are fasting, but only to your Father, who is unseen." – Matthew 6:17-18</div>
+                                <div class="verse-item">"Is not this the kind of fasting I have chosen: to loose the chains of injustice and untie the cords of the yoke?" – Isaiah 58:6</div>
+                                <div class="verse-item">"So we fasted and petitioned our God about this, and he answered our prayer." – Ezra 8:23</div>
+                                <div class="verse-item">"Devote yourselves to prayer, being watchful and thankful." – Colossians 4:2</div>
+                                <div class="verse-item">"And when you pray, do not keep on babbling like pagans, for your Father knows what you need before you ask him." – Matthew 6:7-8</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <hr class="section-divider">
-    <!-- Chat Section -->
-    <section class="chat-section container mx-auto px-4 mt-12 pb-8">
-        <h2 class="text-2xl font-bold mb-4 text-center text-[#3498db]"><i class="fas fa-pray icon-deco"></i> Community Chat</h2>
-        <div id="user-id-display" class="text-sm text-gray-400 mb-4 text-center">
-            User ID: <span id="user-id-text" class="font-mono">...</span>
-        </div>
-        <div id="chat-messages" class="h-64 overflow-y-auto rounded-lg p-4 mb-4 space-y-4 relative">
-            <p id="chat-status" class="text-center text-gray-500 italic">Connecting to chat...</p>
-            <p id="typing-indicator" class="typing-indicator">Someone is typing...</p>
-            <button id="scroll-to-bottom" title="Scroll to bottom"><i class="fas fa-arrow-down"></i></button>
-        </div>
-        <form id="chat-form" class="flex flex-col sm:flex-row gap-4">
-            <div class="flex-grow relative">
-                <input type="text" id="chat-input" placeholder="Type your message (max 500 characters)..." maxlength="500" required
-                    class="w-full rounded-full p-3 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <div id="character-counter" class="absolute right-0">0/500</div>
-            </div>
-            <label for="file-upload" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300 cursor-pointer text-center">
-                Upload
-            </label>
-            <input type="file" id="file-upload" class="hidden">
-            <button type="submit" class="bg-yellow-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-colors duration-300">
-                Send
-            </button>
-            <button type="button" id="clear-chat-btn" class="bg-red-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-red-600 transition-colors duration-300">
-                Clear Chat
-            </button>
-        </form>
-    </section>
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors btn-hover" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-    <hr class="section-divider">
-    <!-- Media Section -->
-    <div class="media">
-        <p>Follow us on our social media</p>
-        <a href="https://www.instagram.com/god_s_prayer_squad_gps/" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/search/top?q=gods%20prayer%20squad%20-gps" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/god_s_prayer_squad_gps/" title="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-    </div>
+    <!-- Message Container -->
+    <div id="message-box" class="message-container" role="alert"></div>
 
-    <!-- Footer -->
-    <footer>
-        &copy; 2025 God's Prayer Squad. All rights reserved<br>
-        <p>Designed by Alhan<br>
-        +255699889376 / +255750589376<br>
-        alhanh52@gmail.com</p>
-    </footer>
-
-    <!-- Pop-up Modals -->
-    <div id="contact-popup" class="popup-overlay">
-        <div class="popup-content">
-            <h3>Contact Information</h3>
-            <p><strong>Normal Call:</strong> +255699889376</p>
-            <p><strong>WhatsApp No:</strong> +255699889376</p>
-            <p><strong>Email:</strong> alhanh52@gmail.com</p>
-            <p><strong>Location:</strong> Mbeya, Tanzania</p>
-            <button class="popup-close-btn">Close</button>
-        </div>
-    </div>
-
-    <div id="visit-popup" class="popup-overlay">
-        <div class="popup-content">
-            <h4>Support Our Family through Your Offering</h4>
-            <h3>Our Bank Account</h3>
-            <div class="Bank">
-                <img src="account.jpg" alt="Bank Account Logo">
-            </div>
-            <hr class="h-0.5 bg-[#3498db]">
-            <h3>Our Mobile Account</h3>
-            <h4>Name: God's Prayer Squad</h4>
-            <div class="mobile">
-                <img src="mobile.png" alt="Mobile Payment Logo">
-                Voda Lipa Namba: 56540743<br>Airtel Lipa Namba: 13891728
-            </div>
-            <button class="popup-close-btn">Close</button>
-        </div>
-    </div>
-
-    <script type="module">
-        import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-        // Supabase configuration (replace with your actual Supabase URL and anon key)
-        const supabaseUrl = 'YOUR_SUPABASE_URL'; // e.g., 'https://your-project-id.supabase.co'
-        const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
-
-        const chatStatusElement = document.getElementById('chat-status');
-        const userIdTextElement = document.getElementById('user-id-text');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const fileUploadInput = document.getElementById('file-upload');
-        const chatMessagesContainer = document.getElementById('chat-messages');
-        const typingIndicator = document.getElementById('typing-indicator');
-        const scrollToBottomBtn = document.getElementById('scroll-to-bottom');
-        const clearChatBtn = document.getElementById('clear-chat-btn');
-        const characterCounter = document.getElementById('character-counter');
-
-        let supabase;
-        let isAuthReady = false;
-        let userId;
-        let isTyping = false;
-        let typingTimeout;
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize Particles.js
-            particlesJS('particles-js', {
-                particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: ['#3498db', '#e74c3c', '#ffffff'] },
-                    shape: { type: 'circle' },
-                    opacity: { value: 0.5, random: true },
-                    size: { value: 3, random: true },
-                    line_linked: { enable: true, distance: 150, color: '#3498db', opacity: 0.4, width: 1 },
-                    move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out' }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-                    modes: { repulse: { distance: 100 }, push: { particles_nb: 4 } }
-                },
-                retina_detect: true
-            });
-
-            const verseTextElement = document.getElementById('verse-text');
-            const verseReferenceElement = document.getElementById('verse-reference');
-
-            const dailyVerses = [
-                { text: "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.", reference: "John 3:16" },
-                { text: "The Lord is my shepherd; I shall not want.", reference: "Psalm 23:1" },
-                { text: "Trust in the Lord with all your heart, and do not lean on your own understanding.", reference: "Proverbs 3:5" },
-                { text: "I can do all things through him who strengthens me.", reference: "Philippians 4:13" },
-                { text: "For where two or three are gathered in my name, there am I among them.", reference: "Matthew 18:20" },
-                { text: "But he was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him, and by his wounds we are healed.", reference: "Isaiah 53:5" },
-                { text: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.", reference: "Isaiah 41:10" },
-                { text: "The steadfast love of the Lord never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.", reference: "Lamentations 3:22-23" },
-                { text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose.", reference: "Romans 8:28" }
-            ];
-
-            const now = new Date();
-            const start = new Date(now.getFullYear(), 0, 0);
-            const diff = now - start;
-            const oneDay = 1000 * 60 * 60 * 24;
-            const dayOfYear = Math.floor(diff / oneDay);
-
-            const verseIndex = dayOfYear % dailyVerses.length;
-            const todayVerse = dailyVerses[verseIndex];
-
-            verseTextElement.textContent = `"${todayVerse.text}"`;
-            verseReferenceElement.textContent = todayVerse.reference;
-
-            // Supabase initialization with error handling
-            try {
-                // Check if Supabase config is valid
-                if (!supabaseUrl || !supabaseAnonKey || supabaseUrl === 'YOUR_SUPABASE_URL') {
-                    throw new Error("Invalid or missing Supabase configuration. Please provide valid URL and anon key.");
-                }
-
-                supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-                // Attempt authentication
-                const { data: authData, error: authError } = await supabase.auth.signInAnonymously();
-                if (authError) {
-                    throw authError;
-                }
-
-                userId = authData.user.id;
-                isAuthReady = true;
-                userIdTextElement.textContent = userId;
-                chatStatusElement.textContent = "Welcome to the chat!";
-                setupChatListener();
-            } catch (error) {
-                console.error("Supabase initialization or authentication failed:", error.message);
-                chatStatusElement.textContent = `Failed to connect to chat: ${error.message}. Please check your Supabase configuration or network connection.`;
-            }
-
-            // Popup functionality
-            function openPopup(popupId) {
-                document.getElementById(popupId).style.display = 'flex';
-            }
-
-            function closePopup(popupId) {
-                document.getElementById(popupId).style.display = 'none';
-            }
-
-            const contactBtn = document.getElementById('contact-btn');
-            const visitBtn = document.getElementById('visit-btn');
-
-            contactBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPopup('contact-popup');
-            });
-
-            visitBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                openPopup('visit-popup');
-            });
-
-            const closeButtons = document.querySelectorAll('.popup-close-btn');
-            closeButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const popup = e.target.closest('.popup-overlay');
-                    if (popup) {
-                        closePopup(popup.id);
-                    }
-                });
-            });
-
-            const overlays = document.querySelectorAll('.popup-overlay');
-            overlays.forEach(overlay => {
-                overlay.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('popup-overlay')) {
-                        closePopup(e.target.id);
-                    }
-                });
-            });
-
-            // Character counter
-            chatInput.addEventListener('input', () => {
-                const length = chatInput.value.length;
-                characterCounter.textContent = `${length}/500`;
-                characterCounter.style.color = length > 450 ? '#e74c3c' : '#a0aec0';
-            });
-
-            // Typing indicator
-            chatInput.addEventListener('input', () => {
-                if (!isTyping) {
-                    isTyping = true;
-                    typingIndicator.style.display = 'block';
-                }
-                clearTimeout(typingTimeout);
-                typingTimeout = setTimeout(() => {
-                    isTyping = false;
-                    typingIndicator.style.display = 'none';
-                }, 2000);
-            });
-
-            // Scroll to bottom button
-            chatMessagesContainer.addEventListener('scroll', () => {
-                const isAtBottom = chatMessagesContainer.scrollHeight - chatMessagesContainer.scrollTop <= chatMessagesContainer.clientHeight + 10;
-                scrollToBottomBtn.style.display = isAtBottom ? 'none' : 'flex';
-            });
-
-            scrollToBottomBtn.addEventListener('click', () => {
-                chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-            });
-
-            // Clear chat button
-            clearChatBtn.addEventListener('click', async () => {
-                if (confirm('Are you sure you want to clear all your messages? This cannot be undone.')) {
-                    try {
-                        const { data: userMessages, error } = await supabase
-                            .from('chat_messages')
-                            .select('id')
-                            .eq('user_id', userId);
-
-                        if (error) {
-                            throw error;
-                        }
-
-                        for (const message of userMessages) {
-                            await supabase.from('chat_messages').delete().eq('id', message.id);
-                        }
-                    } catch (error) {
-                        console.error("Error clearing chat:", error.message);
-                        chatStatusElement.textContent = `Error clearing chat: ${error.message}`;
-                    }
-                }
-            });
-        });
-
-        const displayMessage = (messageData, docId) => {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('rounded-lg', 'p-3', 'max-w-[80%]', 'break-words', 'shadow-md');
-            const isSelf = messageData.user_id === userId;
-            if (isSelf) {
-                messageDiv.classList.add('bg-indigo-600', 'text-white', 'ml-auto', 'rounded-br-none');
-            } else {
-                messageDiv.classList.add('bg-gray-700', 'text-white', 'rounded-bl-none');
-            }
-
-            const usernameSpan = document.createElement('span');
-            usernameSpan.classList.add('font-semibold', 'text-sm', 'block', isSelf ? 'text-indigo-200' : 'text-gray-300');
-            usernameSpan.textContent = isSelf ? "You" : messageData.user_id;
-            messageDiv.appendChild(usernameSpan);
-
-            if (messageData.text) {
-                const messageP = document.createElement('p');
-                messageP.classList.add('text-base', 'mt-1');
-                messageP.textContent = messageData.text;
-                messageDiv.appendChild(messageP);
-            } else if (messageData.file_url && messageData.file_type) {
-                if (messageData.file_type.startsWith('image/')) {
-                    const img = document.createElement('img');
-                    img.src = messageData.file_url;
-                    img.alt = 'Uploaded Image';
-                    img.classList.add('rounded-lg', 'mt-2', 'max-h-64', 'object-contain', 'w-full');
-                    messageDiv.appendChild(img);
-                } else if (messageData.file_type.startsWith('audio/')) {
-                    const audio = document.createElement('audio');
-                    audio.controls = true;
-                    audio.src = messageData.file_url;
-                    audio.classList.add('mt-2', 'w-full');
-                    messageDiv.appendChild(audio);
-                } else {
-                    const fileLink = document.createElement('a');
-                    fileLink.href = messageData.file_url;
-                    fileLink.textContent = `Download: ${messageData.file_name}`;
-                    fileLink.target = "_blank";
-                    fileLink.classList.add('text-yellow-300', 'underline', 'mt-1', 'block');
-                    messageDiv.appendChild(fileLink);
-                }
-            }
-
-            const timestampP = document.createElement('p');
-            timestampP.classList.add('message-timestamp');
-            const timestamp = messageData.timestamp ? new Date(messageData.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Just now';
-            timestampP.textContent = timestamp;
-            messageDiv.appendChild(timestampP);
-
-            if (isSelf) {
-                const deleteBtn = document.createElement('button');
-                deleteBtn.classList.add('delete-message-btn');
-                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                deleteBtn.addEventListener('click', async () => {
-                    if (confirm('Are you sure you want to delete this message?')) {
-                        try {
-                            await supabase.from('chat_messages').delete().eq('id', docId);
-                        } catch (error) {
-                            console.error("Error deleting message:", error.message);
-                            chatStatusElement.textContent = `Error deleting message: ${error.message}`;
-                        }
-                    }
-                });
-                messageDiv.appendChild(deleteBtn);
-            }
-
-            chatMessagesContainer.appendChild(messageDiv);
-            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-        };
-
-        const setupChatListener = () => {
-            const { data: subscription } = supabase
-                .channel('chat_messages')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'chat_messages' }, payload => {
-                    if (payload.eventType === 'INSERT') {
-                        displayMessage(payload.new, payload.new.id);
-                    } else if (payload.eventType === 'DELETE') {
-                        const messageDiv = document.querySelector(`[data-id="${payload.old.id}"]`);
-                        if (messageDiv) {
-                            messageDiv.remove();
-                        }
-                    }
-                })
-                .subscribe();
-
-            // Initial fetch
-            supabase.from('chat_messages').select('*').order('timestamp', { ascending: true }).then(({ data, error }) => {
-                if (error) {
-                    console.error("Error fetching messages:", error.message);
-                    chatStatusElement.textContent = `Error loading messages: ${error.message}`;
-                } else if (data.length === 0) {
-                    chatStatusElement.textContent = "No messages yet. Be the first to chat!";
-                    typingIndicator.style.display = 'none';
-                } else {
-                    chatStatusElement.style.display = 'none';
-                    data.forEach(message => {
-                        displayMessage(message, message.id);
-                    });
-                }
-            });
-        };
-
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!isAuthReady) {
-                chatStatusElement.textContent = "Cannot send message: Not connected to Supabase.";
-                return;
-            }
-
-            const messageText = chatInput.value.trim();
-            const file = fileUploadInput.files[0];
-
-            if (messageText === "" && !file) {
-                return;
-            }
-
-            try {
-                if (file) {
-                    const filePath = `chat_uploads/${file.name}_${Date.now()}`;
-                    const { error: uploadError } = await supabase.storage.from('chat_uploads').upload(filePath, file);
-                    if (uploadError) {
-                        throw uploadError;
-                    }
-                    const { data: urlData } = supabase.storage.from('chat_uploads').getPublicUrl(filePath);
-                    const fileUrl = urlData.publicUrl;
-                    await supabase.from('chat_messages').insert({
-                        user_id: userId,
-                        text: null,
-                        file_url: fileUrl,
-                        file_type: file.type,
-                        file_name: file.name,
-                        timestamp: new Date()
-                    });
-                } else if (messageText) {
-                    await supabase.from('chat_messages').insert({
-                        user_id: userId,
-                        text: messageText,
-                        timestamp: new Date()
-                    });
-                }
-
-                chatInput.value = "";
-                fileUploadInput.value = "";
-                characterCounter.textContent = "0/500";
-                characterCounter.style.color = '#a0aec0';
-            } catch (error) {
-                console.error("Error sending message or uploading file:", error.message);
-                chatStatusElement.textContent = `Error sending message: ${error.message}`;
-            }
-        });
-    </script>
+    <!-- Popup Message Container -->
+    <div id="popup-message" class="popup-message" role="alert"></div>
 </body>
 </html>
-
-
