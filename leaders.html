@@ -8,7 +8,18 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-        background-image: linear-gradient(to right top, #eb8808, #f86548, #ec4f74, #c85098, #925aab, #746eba, #567dbf, #4489bb, #64a6c7, #8cc2d2, #b9dce1, #e7f6f5);
+            margin: 0; /* Ensure no default margin interferes with background */
+        }
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://picsum.photos/id/1015/1920/1080?blur=3') no-repeat center center/cover;
+            opacity: 0.3; /* Subtle opacity for readability */
+        }
         .profile-card {
             background-color: white;
             border-radius: 1.5rem;
@@ -106,9 +117,24 @@
             color: #3b82f6; /* A noticeable blue color */
             transition: color 0.8s ease-in-out;
         }
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+            }
+            .background-container {
+                display: none;
+            }
+            header, nav {
+                position: static;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100 flex flex-col items-center min-h-screen p-4 pt-48">
+<body class="flex flex-col items-center min-h-screen p-4 pt-48">
+    <!-- Background Container -->
+    <div class="background-container"></div>
 
     <header>
         <div class="logo">
@@ -153,7 +179,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Led her company to a record-breaking IPO in 2022 and launched a global initiative to promote digital literacy in underserved communities.",
-                image: "https://via.placeholder.com/150/ef4444/FFFFFF?text=H1",
+                image: "kiribuche.jpg",
                 color: "bg-emerald-500",
                 background: "red",
             },
@@ -165,7 +191,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Orchestrated a major merger of two international banks, resulting in the creation of a global financial powerhouse and increased stability in the market.",
-                image: "https://via.placeholder.com/150/f97316/FFFFFF?text=L2",
+                image: "kiribuche.jpg",
                 color: "bg-blue-500",
             },
             {
@@ -176,7 +202,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Developed a new vaccine delivery system that significantly improved vaccination rates in remote, rural areas across several continents.",
-                image: "https://via.placeholder.com/150/10b981/FFFFFF?text=K3",
+                image: "kiribuche.jpg",
                 color: "bg-orange-500",
             },
             {
@@ -187,7 +213,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Successfully lobbied for new renewable energy policies, leading to a nationwide increase in the adoption of clean power sources.",
-                image: "https://via.placeholder.com/150/d946ef/FFFFFF?text=R4",
+                image: "kiribuche.jpg",
                 color: "bg-emerald-500",
             },
             {
@@ -198,7 +224,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Led a groundbreaking project to digitally archive and restore ancient manuscripts, making them accessible to scholars globally for the first time.",
-                image: "https://via.placeholder.com/150/ef4444/FFFFFF?text=E5",
+                image: "kiribuche.jpg",
                 color: "bg-fuchsia-500",
             },
             {
@@ -209,7 +235,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Published a landmark paper on AI ethics that has become a foundational text for tech companies and academic institutions worldwide.",
-                image: "https://via.placeholder.com/150/60a5fa/FFFFFF?text=E6",
+                image: "kiribuche.jpg",
                 color: "bg-red-500",
             },
             {
@@ -220,7 +246,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Designed and oversaw the construction of a carbon-neutral city district that has become a global model for sustainable urban development.",
-                image: "https://via.placeholder.com/150/f59e0b/FFFFFF?text=N7",
+                image: "kiribuche.jpg",
                 color: "bg-blue-500",
             },
             {
@@ -231,7 +257,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Established a network of community gardens and agricultural cooperatives that have significantly reduced food scarcity in several regions.",
-                image: "https://via.placeholder.com/150/8b5cf6/FFFFFF?text=I8",
+                image: "kiribuche.jpg",
                 color: "bg-amber-500",
             },
             {
@@ -242,7 +268,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Oversaw the successful launch and deployment of a new orbital telescope that has provided unprecedented views of distant galaxies.",
-                image: "https://via.placeholder.com/150/14b8a6/FFFFFF?text=G9",
+                image: "kiribuche.jpg",
                 color: "bg-violet-500",
             },
             {
@@ -253,7 +279,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Developed an autonomous drone system that can quickly locate survivors in collapsed buildings and difficult-to-reach areas.",
-                image: "https://via.placeholder.com/150/6366f1/FFFFFF?text=H10",
+                image: "kiribuche.jpg",
                 color: "bg-red-500",
             },
             {
@@ -264,7 +290,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "Her online learning platform has been adopted by over 50,000 schools in developing countries, providing millions of students with access to education.",
-                image: "https://via.placeholder.com/150/60a5fa/FFFFFF?text=J11",
+                image: "kiribuche.jpg",
                 color: "bg-teal-500",
             },
             {
@@ -275,7 +301,7 @@
                 course: "Instagram",
                 level: "4",
                 achievement: "He was one of the first investors in a company that is now a leader in sustainable agriculture, and his funding helped them scale their operations globally.",
-                image: "https://via.placeholder.com/150/f59e0b/FFFFFF?text=E12",
+                image: "kiribuche.jpg",
                 color: "bg-indigo-500",
             }
         ];
