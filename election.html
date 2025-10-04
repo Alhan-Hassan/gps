@@ -40,8 +40,8 @@
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <header class="text-center mb-10 p-6 bg-white rounded-xl shadow-lg">
-            <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Official Leadership Ballot</h1>
-            <p class="text-lg text-gray-500 mt-2">Select one candidate for each of the 12 positions below.</p>
+            <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Official Gps Candidate</h1>
+            <p class="text-lg text-gray-500 mt-2">Select one candidate for each of the  positions below.</p>
         </header>
 
         <!-- Ballot Container -->
@@ -67,7 +67,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Vote Cast Successfully!</h3>
-                    <p class="text-gray-600 mb-6">Your selections have been recorded in the database. Thank you for participating.</p>
+                    <p class="text-gray-600 mb-6">Thank you for participating in the election process. Your selections have been recorded.</p>
                     <button onclick="document.getElementById('confirmation-modal').classList.add('hidden')"
                         class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
                         Close
@@ -78,21 +78,7 @@
         </div>
     </div>
 
-    <script type="module">
-        // Firebase Imports
-        import { initializeApp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // Global variables provided by the Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-        
-        let db;
-        let auth;
-        let userId = 'anonymous'; // Default, updated after sign-in
-
+    <script>
         // Data structure for the election: 12 positions, 3 candidates each.
         const ELECTION_DATA = [
             { position: "President", candidates: ["Alice Chen", "Ben Carter", "Zara Khan"] },
@@ -112,50 +98,10 @@
         // State to track the user's current selections
         let currentVotes = {};
 
-        // 1. Initialize Firebase, Auth, and Firestore
-        async function initFirebase() {
-            if (!firebaseConfig) {
-                console.error("Firebase configuration not found. Skipping database initialization.");
-                return;
-            }
-
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                // setLogLevel is now correctly imported from the app module
-                setLogLevel('Debug'); // Enable Firestore logging 
-
-                // Authenticate user
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                // Get the user ID
-                userId = auth.currentUser?.uid || crypto.randomUUID();
-                console.log("Firebase initialized successfully. User ID:", userId);
-
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                document.getElementById('status-message').textContent = 'Error: Database connection failed.';
-                document.getElementById('status-message').classList.remove('hidden');
-            }
-        }
-
-
-        // Helper function to create candidate cards (unchanged)
+        // Helper function to create candidate cards
         function createCandidateCard(positionIndex, candidateName, candidateIndex) {
             const positionId = ELECTION_DATA[positionIndex].position.replace(/\s/g, '-');
             const candidateId = `${positionId}-${candidateIndex}`;
-
-            // Color mapping for placeholder images based on candidate index (0, 1, or 2)
-            const colors = ["6366f1", "f97316", "10b981"]; // Indigo, Orange, Emerald
-            const initials = candidateName.split(' ').map(n => n[0]).join('');
-            const color = colors[candidateIndex % colors.length]; // Cycle through colors
-            const imageUrl = `https://placehold.co/40x40/${color}/white?text=${initials}`;
 
             // Create the main label container (which acts as the clickable card)
             const label = document.createElement('label');
@@ -169,12 +115,12 @@
             input.name = positionId; // Grouped by position
             input.id = candidateId;
             input.value = candidateName;
-            
-            // Profile Image Element
-            const profileImage = document.createElement('img');
-            profileImage.className = 'w-10 h-10 rounded-full object-cover mr-4 shrink-0 border-2 border-white shadow-sm';
-            profileImage.src = imageUrl;
-            profileImage.alt = `Profile picture for ${candidateName}`;
+
+            // Display elements
+            const initials = candidateName.split(' ').map(n => n[0]).join('');
+            const initialIcon = document.createElement('div');
+            initialIcon.className = 'w-10 h-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full mr-4 text-lg shrink-0';
+            initialIcon.textContent = initials;
 
             const nameText = document.createElement('span');
             nameText.className = 'text-gray-800 font-semibold truncate';
@@ -190,14 +136,14 @@
 
 
             label.appendChild(input);
-            label.appendChild(profileImage); // Insert the profile picture
+            label.appendChild(initialIcon);
             label.appendChild(nameText);
             label.appendChild(checkIcon);
 
             return label;
         }
 
-        // Handles candidate selection and updates the UI/state (unchanged)
+        // Handles candidate selection and updates the UI/state
         function selectCandidate(positionId, candidateName, selectedCard) {
             currentVotes[positionId] = candidateName;
 
@@ -217,7 +163,7 @@
             checkSubmissionStatus();
         }
 
-        // Checks if all positions have a vote and enables/disables the submit button (unchanged)
+        // Checks if all positions have a vote and enables/disables the submit button
         function checkSubmissionStatus() {
             const numPositions = ELECTION_DATA.length;
             const numVotes = Object.keys(currentVotes).length;
@@ -231,7 +177,7 @@
             }
         }
 
-        // Renders the entire ballot page (unchanged)
+        // Renders the entire ballot page
         function renderBallot() {
             const ballotContainer = document.getElementById('ballot-container');
             ELECTION_DATA.forEach((data, pIndex) => {
@@ -262,74 +208,34 @@
             });
         }
 
-        // 2. Function called when the user clicks 'Cast My Vote' - NOW WITH FIREBASE
-        window.castVote = async function() {
+        // Function called when the user clicks 'Cast My Vote'
+        function castVote() {
             const numPositions = ELECTION_DATA.length;
             const numVotes = Object.keys(currentVotes).length;
             const statusMessage = document.getElementById('status-message');
-            const submitButton = document.getElementById('submit-button');
 
             if (numVotes < numPositions) {
-                statusMessage.textContent = 'Please select a candidate for all 12 positions before submitting.';
                 statusMessage.classList.remove('hidden');
+                // Scroll to the top to see the error message
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
 
-            // Show loading state
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-            statusMessage.classList.add('hidden'); // Hide previous errors
+            // 1. Show the final confirmation modal
+            document.getElementById('confirmation-modal').classList.remove('hidden');
 
-            if (!db) {
-                statusMessage.textContent = 'Error: Database connection failed. Cannot cast vote.';
-                statusMessage.classList.remove('hidden');
-                submitButton.textContent = 'Cast My Vote';
-                submitButton.disabled = false;
-                return;
-            }
+            // 2. Log the final result to the console (in a real app, this data would be sent to a server)
+            console.log("--- FINAL VOTE SUBMISSION ---");
+            console.log(JSON.stringify(currentVotes, null, 2));
 
-            try {
-                // Prepare the submission document
-                const voteSubmission = {
-                    userId: userId, // Record who submitted the vote
-                    timestamp: new Date(),
-                    ...currentVotes // Spreads the 12 position votes (e.g., {President: "Alice Chen", ...})
-                };
-
-                // Store the vote in a public collection for easy aggregation later
-                // Path: /artifacts/{appId}/public/data/election_votes
-                const collectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'election_votes');
-                
-                await addDoc(collectionRef, voteSubmission);
-
-                console.log("Vote successfully cast and saved to Firestore. Document content:", voteSubmission);
-
-                // On success: Show confirmation modal
-                document.getElementById('confirmation-modal').classList.remove('hidden');
-
-                // Final UI state
-                submitButton.textContent = 'VOTE SUBMITTED';
-                // Visually disable the entire form after successful submission
-                document.querySelectorAll('.candidate-card').forEach(card => card.classList.add('opacity-70', 'pointer-events-none'));
-                
-                // Note: The total vote count would be calculated by querying and aggregating 
-                // the documents in the 'election_votes' collection.
-                
-            } catch (error) {
-                console.error("Error casting vote:", error);
-                // Handle error state
-                statusMessage.textContent = `Error: Failed to cast vote (${error.message}). Please try again.`;
-                statusMessage.classList.remove('hidden');
-                submitButton.textContent = 'Cast My Vote';
-                submitButton.disabled = false;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            // Optional: Visually disable the entire form after submission (for a real scenario)
+            document.getElementById('submit-button').disabled = true;
+            document.getElementById('submit-button').textContent = 'VOTE SUBMITTED';
+            document.querySelectorAll('.candidate-card').forEach(card => card.classList.add('opacity-70', 'pointer-events-none'));
         }
 
         // Initial setup
-        window.onload = async () => {
-            await initFirebase();
+        window.onload = () => {
             renderBallot();
             checkSubmissionStatus(); // Check on load (it will be disabled initially)
         };
