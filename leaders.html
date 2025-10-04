@@ -2,15 +2,199 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leader Profiles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0; /* Ensure no default margin interferes with background */
+            margin: 0;
+            background: #ecf0f1;
+            color: #2c3e50;
+            line-height: 1.6;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
         }
-        .background-container {
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(231, 76, 60, 0.2));
+            z-index: -1;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-logo-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #3498db;
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .header-logo-text:hover {
+            color: #2980b9;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+        }
+
+        .gps-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px dashed #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        .gps-circle span {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        @keyframes shine {
+            0%, 100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.8); }
+        }
+
+        .nav-button {
+            position: relative;
+            overflow: hidden;
+            background: #3498db;
+            color: #ffffff;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: #c0392b;
+            transform: scale(1.05);
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav-button:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .section-divider {
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            margin: 20px auto;
+            animation: gradient-flow 4s linear infinite;
+        }
+
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        footer {
+            text-align: center;
+            color: #ffffff;
+            padding: 20px;
+            background: #2c3e50;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #e74c3c);
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            animation: gradient-flow 4s linear infinite;
+        }
+
+        footer p {
+            color: #3498db;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 320px) {
+            body {
+                padding-top: 100px;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .header-logo-text {
+                font-size: 1.5em;
+            }
+
+            .gps-circle {
+                width: 40px;
+                height: 40px;
+                margin-left: 10px;
+            }
+
+            .gps-circle span {
+                font-size: 0.9em;
+            }
+
+            .nav-button {
+                padding: 10px 12px;
+                font-size: 0.9em;
+            }
+        }
+
+
+         .background-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -69,44 +253,7 @@
             flex-direction: column;
             align-items: flex-start;
         }
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1a237e;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            z-index: 100;
-        }
-        header .logo {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #ffb74d;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            transition: color 0.3s ease;
-        }
-        header .logo:hover {
-            color: #ffd54f;
-        }
-        nav {
-            position: fixed;
-            top: 90px;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            text-align: center;
-            background-color: #283593;
-            padding: 14px 0;
-        }
-        nav h1 {
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-            margin: 0;
-        }
+      
         /* New CSS for rotation animation and color change */
         .rotate-animation {
             transform: rotate(360deg);
@@ -132,25 +279,28 @@
         }
     </style>
 </head>
-<body class="flex flex-col items-center min-h-screen p-4 pt-48">
+ <body class="flex flex-col items-center min-h-screen p-4 pt-48">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <div class="bg-overlay"></div>
+
+    <header>
+        <div class="gps-circle">
+            <span>GPS</span>
+        </div>
+        <h1 class="header-logo-text">God's Prayer Squad</h1>
+        <h1 style="text-align: center; color: darkblue;background: whitesmoke;margin-top:10px;padding: 10px;width: 100%;">2025/2026 Minisry Coordinators</h1>
+    </header>
+
+
+
+
+
+
     <!-- Background Container -->
     <div class="background-container"></div>
 
-    <header>
-        <div class="logo">
-            <img src="https://via.placeholder.com/50x50?text=GPS" alt="God's Prayer Squad" style="vertical-align: middle; margin-right: 15px; border-radius: 50%;">
-            God's Prayer Squad
-        </div>
-    </header>
-
-    <nav>
-        <h1>2025/2026 Gps Mistry Representatives</h1>
-    </nav>
-
-    <div class="container mx-auto px-4 py-8 max-w-7xl">
-        <h1 class="text-5xl font-extrabold text-center text-gray-900 mb-12 drop-shadow-md">
-            Ministry Coordinators
-        </h1>
+   
 
         <div id="profiles-container">
             <h2 class="text-3xl font-bold text-gray-800 text-center mb-4">Gps Leaders</h2>
@@ -401,7 +551,7 @@
             });
         });
     </script>
+
+   
 </body>
 </html>
-
-
