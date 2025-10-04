@@ -2,243 +2,442 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Leadership Election Ballot</title>
-    <!-- Load Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Navigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
-        /* Custom styles for a cleaner interface */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f9; /* Light background */
+            margin: 0;
+            color: #2c3e50;
+            line-height: 1.6;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #93c5fd 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease-in-out infinite;
         }
-        .candidate-card {
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            border: 2px solid transparent;
-            min-height: 120px;
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
-        /* Style for the selected card */
-        .candidate-card.selected {
-            border-color: #2563eb; /* Blue border */
-            background-color: #eff6ff; /* Light blue background */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            transform: translateY(-2px);
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: -1;
         }
-        /* Hide the default radio button visually */
-        input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #2c3e50;
+            color: #ffffff;
+            padding: 15px 20px;
+            text-align: center;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-logo-text {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #3498db;
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .header-logo-text:hover {
+            color: #2980b9;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
+        }
+
+        .gps-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px dashed #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 20px;
+            animation: shine 2s ease-in-out infinite;
+        }
+
+        .gps-circle span {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes shine {
+            0% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+        }
+
+        @media (max-width: 320px) {
+            body {
+                padding-top: 100px;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .header-logo-text {
+                font-size: 1.5em;
+            }
+
+            .gps-circle {
+                width: 40px;
+                height: 40px;
+                margin-left: 10px;
+            }
+
+            .gps-circle span {
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="flex flex-col items-center min-h-screen p-4 pt-48">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    <div class="bg-overlay"></div>
 
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <header class="text-center mb-10 p-6 bg-white rounded-xl shadow-lg">
-            <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Official Gps Candidate</h1>
-            <p class="text-lg text-gray-500 mt-2">Select one candidate for each of the  positions below.</p>
-        </header>
+    <header>
+        <div class="gps-circle">
+            <span>GPS</span>
+        </div>
+        <h1 class="header-logo-text">God's Prayer Squad</h1>
+        <h1 style="text-align: center; color: darkblue; background: whitesmoke; margin-top: 10px; padding: 1px; width: 100%;">2025/2026 Ministry Coordinators Election</h1>
+    </header>
 
-        <!-- Ballot Container -->
-        <main id="ballot-container" class="space-y-8">
-            <!-- Positions will be rendered here by JavaScript -->
-        </main>
-
-        <!-- Submission Section -->
-        <div class="mt-12 p-6 bg-white rounded-xl shadow-lg border-t-4 border-blue-500">
-            <div id="status-message" class="text-center mb-4 text-lg text-red-600 font-semibold hidden">
-                Please select a candidate for all 12 positions before submitting.
-            </div>
-            <button id="submit-button" onclick="castVote()"
-                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition duration-150 ease-in-out disabled:opacity-50"
-                disabled>
-                Cast My Vote
-            </button>
-
-            <!-- Custom Alert/Confirmation Modal -->
-            <div id="confirmation-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50">
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300">
-                    <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Vote Cast Successfully!</h3>
-                    <p class="text-gray-600 mb-6">Thank you for participating in the election process. Your selections have been recorded.</p>
-                    <button onclick="document.getElementById('confirmation-modal').classList.add('hidden')"
-                        class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
-                        Close
-                    </button>
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Election 2025: Vote for Your Leaders</h1>
+        <form id="voteForm" class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Position 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="president" value="John Smith" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="president" value="Emma Johnson" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="president" value="Michael Brown" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Vice Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="vice_president" value="Sarah Davis" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="vice_president" value="David Wilson" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="vice_president" value="Laura Martinez" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Secretary Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="secretary" value="Emily Clark" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="secretary" value="James Lee" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="secretary" value="Sophia Garcia" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Finance Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="treasurer" value="Robert Taylor" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="treasurer" value="Olivia Anderson" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="treasurer" value="William Thomas" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Media Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="pr_officer" value="Mia Rodriguez" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="pr_officer" value="Ethan Walker" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="pr_officer" value="Ava Lewis" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Social Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="event_coordinator" value="Liam Hall" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="event_coordinator" value="Charlotte Allen" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="event_coordinator" value="Noah Young" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 7 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Women Hostel Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="membership_chair" value="Isabella King" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="membership_chair" value="Mason Scott" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="membership_chair" value="Harper Green" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 8 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Men Hostel Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="tech_officer" value="Lucas Adams" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="tech_officer" value="Chloe Baker" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="tech_officer" value="Benjamin Hill" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 9 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Ikuti Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="outreach_lead" value="Amelia Wright" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="outreach_lead" value="Jacob Turner" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="outreach_lead" value="Evelyn Carter" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 10 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Coca Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="fundraising_chair" value="Daniel Evans" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="fundraising_chair" value="Abigail Morris" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="fundraising_chair" value="Samuel Parker" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 11 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Inyara Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="ethics_officer" value="Grace Phillips" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ethics_officer" value="Owen Campbell" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ethics_officer" value="Lily Mitchell" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- Position 12 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Other Coordinator</h2>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="sustainability_lead" value="Elijah Reed" class="mr-2" required>
+                            <span class="text-gray-600">First Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="sustainability_lead" value="Sofia Cooper" class="mr-2">
+                            <span class="text-gray-600">Second Candidate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="sustainability_lead" value="Jack Hughes" class="mr-2">
+                            <span class="text-gray-600">Third Candidate</span>
+                        </label>
+                    </div>
                 </div>
             </div>
-
-        </div>
+            <div class="text-center">
+                <button type="button" onclick="submitVotes()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Submit Votes</button>
+            </div>
+        </form>
+        <div id="confirmation" class="hidden mt-6 p-4 bg-green-100 text-green-800 rounded-lg text-center"></div>
+        <footer class="mt-8 text-center text-gray-500">
+            <p>Election 2025 | Vote for the Future</p>
+        </footer>
     </div>
-
     <script>
-        // Data structure for the election: 12 positions, 3 candidates each.
-        const ELECTION_DATA = [
-            { position: "coordinator", candidates: ["First candidate", "second candidate", "third candidate"] },
-            { position: "Vice coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] },
-            { position: "Secretary coordinator", candidates: ["First candidate", "second candidate", "third candidate"] },
-            { position: "finace coordinator", candidates: ["First candidate", "second candidate", "third candidate"]},
-            { position: "media coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] },
-            { position: "social Coordinator", candidates: ["First candidate", "second candidate", "third candidate"] },
-            { position: "men hostel coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] },
-            { position: "women hostel coordinator", candidates: ["First candidate", "second candidate", "third candidate"] },
-            { position: "coca coordinator", candidates: ["First candidate", "second candidate", "third candidate"]] },
-            { position: "Ikut coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] },
-            { position: "Inyara coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] },
-            { position: "other coordinator", candidates:  ["First candidate", "second candidate", "third candidate"] }
-        ];
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle', stroke: { width: 0, color: '#000000' } },
+                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1 } },
+                size: { value: 3, random: true, anim: { enable: true, speed: 2, size_min: 0.1 } },
+                line_linked: { enable: true, distance: 150, color: '#3498db', opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, out_mode: 'out', bounce: false }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' }, resize: true },
+                modes: { grab: { distance: 200, line_linked: { opacity: 0.7 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
 
-        // State to track the user's current selections
-        let currentVotes = {};
+        function submitVotes() {
+            const form = document.getElementById('voteForm');
+            const confirmationDiv = document.getElementById('confirmation');
+            const positions = [
+                'president', 'vice_president', 'secretary', 'treasurer', 'pr_officer',
+                'event_coordinator', 'membership_chair', 'tech_officer', 'outreach_lead',
+                'fundraising_chair', 'ethics_officer', 'sustainability_lead'
+            ];
+            const votes = {};
 
-        // Helper function to create candidate cards
-        function createCandidateCard(positionIndex, candidateName, candidateIndex) {
-            const positionId = ELECTION_DATA[positionIndex].position.replace(/\s/g, '-');
-            const candidateId = `${positionId}-${candidateIndex}`;
-
-            // Create the main label container (which acts as the clickable card)
-            const label = document.createElement('label');
-            label.className = "candidate-card flex items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md border-2 border-transparent transition cursor-pointer";
-            label.htmlFor = candidateId;
-            label.onclick = () => selectCandidate(positionId, candidateName, label);
-
-            // Hidden radio input
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.name = positionId; // Grouped by position
-            input.id = candidateId;
-            input.value = candidateName;
-
-            // Display elements
-            const initials = candidateName.split(' ').map(n => n[0]).join('');
-            const initialIcon = document.createElement('div');
-            initialIcon.className = 'w-10 h-10 flex items-center justify-center bg-blue-500 text-white font-bold rounded-full mr-4 text-lg shrink-0';
-            initialIcon.textContent = initials;
-
-            const nameText = document.createElement('span');
-            nameText.className = 'text-gray-800 font-semibold truncate';
-            nameText.textContent = candidateName;
-
-            // Checkmark icon (for selected state)
-            const checkIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            checkIcon.setAttribute('class', 'w-6 h-6 ml-auto text-blue-500 hidden selection-indicator');
-            checkIcon.setAttribute('fill', 'none');
-            checkIcon.setAttribute('stroke', 'currentColor');
-            checkIcon.setAttribute('viewBox', '0 0 24 24');
-            checkIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
-
-
-            label.appendChild(input);
-            label.appendChild(initialIcon);
-            label.appendChild(nameText);
-            label.appendChild(checkIcon);
-
-            return label;
-        }
-
-        // Handles candidate selection and updates the UI/state
-        function selectCandidate(positionId, candidateName, selectedCard) {
-            currentVotes[positionId] = candidateName;
-
-            // Deselect all cards for this position
-            const container = selectedCard.closest('.position-group');
-            if (container) {
-                container.querySelectorAll('.candidate-card').forEach(card => {
-                    card.classList.remove('selected');
-                    card.querySelector('.selection-indicator').classList.add('hidden');
-                });
-            }
-
-            // Select the clicked card
-            selectedCard.classList.add('selected');
-            selectedCard.querySelector('.selection-indicator').classList.remove('hidden');
-
-            checkSubmissionStatus();
-        }
-
-        // Checks if all positions have a vote and enables/disables the submit button
-        function checkSubmissionStatus() {
-            const numPositions = ELECTION_DATA.length;
-            const numVotes = Object.keys(currentVotes).length;
-            const submitButton = document.getElementById('submit-button');
-
-            if (numVotes === numPositions) {
-                submitButton.disabled = false;
-                document.getElementById('status-message').classList.add('hidden');
-            } else {
-                submitButton.disabled = true;
-            }
-        }
-
-        // Renders the entire ballot page
-        function renderBallot() {
-            const ballotContainer = document.getElementById('ballot-container');
-            ELECTION_DATA.forEach((data, pIndex) => {
-                const positionId = data.position.replace(/\s/g, '-');
-
-                // Position Section Container
-                const section = document.createElement('section');
-                section.className = 'position-group bg-white p-5 rounded-xl shadow-md';
-                section.id = `group-${positionId}`;
-
-                // Position Title
-                const title = document.createElement('h2');
-                title.className = 'text-2xl font-bold text-gray-700 mb-4 border-b pb-2 border-indigo-100';
-                title.textContent = data.position;
-
-                // Candidates Grid
-                const candidatesGrid = document.createElement('div');
-                candidatesGrid.className = 'grid grid-cols-1 md:grid-cols-3 gap-4';
-
-                data.candidates.forEach((candidate, cIndex) => {
-                    const card = createCandidateCard(pIndex, candidate, cIndex);
-                    candidatesGrid.appendChild(card);
+            try {
+                positions.forEach(position => {
+                    const selected = form.querySelector(`input[name="${position}"]:checked`);
+                    if (!selected) {
+                        throw new Error(`Please select a candidate for ${position.replace('_', ' ')}`);
+                    }
+                    votes[position] = selected.value;
                 });
 
-                section.appendChild(title);
-                section.appendChild(candidatesGrid);
-                ballotContainer.appendChild(section);
-            });
-        }
+                localStorage.setItem('electionVotes', JSON.stringify(votes));
 
-        // Function called when the user clicks 'Cast My Vote'
-        function castVote() {
-            const numPositions = ELECTION_DATA.length;
-            const numVotes = Object.keys(currentVotes).length;
-            const statusMessage = document.getElementById('status-message');
+                confirmationDiv.classList.remove('hidden');
+                confirmationDiv.innerHTML = 'Your votes have been submitted successfully!';
 
-            if (numVotes < numPositions) {
-                statusMessage.classList.remove('hidden');
-                // Scroll to the top to see the error message
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
+                let voteSummary = '<h3 class="text-lg font-semibold mb-2">Your Votes:</h3><ul class="list-disc list-inside">';
+                for (const [position, candidate] of Object.entries(votes)) {
+                    voteSummary += `<li>${position.replace('_', ' ').toUpperCase()}: ${candidate}</li>`;
+                }
+                voteSummary += '</ul>';
+                confirmationDiv.innerHTML += voteSummary;
+
+                form.reset();
+            } catch (error) {
+                confirmationDiv.classList.remove('hidden');
+                confirmationDiv.classList.add('bg-red-100', 'text-red-800');
+                confirmationDiv.innerHTML = error.message;
+                setTimeout(() => {
+                    confirmationDiv.classList.remove('bg-red-100', 'text-red-800');
+                    confirmationDiv.classList.add('hidden');
+                }, 3000);
             }
-
-            // 1. Show the final confirmation modal
-            document.getElementById('confirmation-modal').classList.remove('hidden');
-
-            // 2. Log the final result to the console (in a real app, this data would be sent to a server)
-            console.log("--- FINAL VOTE SUBMISSION ---");
-            console.log(JSON.stringify(currentVotes, null, 2));
-
-            // Optional: Visually disable the entire form after submission (for a real scenario)
-            document.getElementById('submit-button').disabled = true;
-            document.getElementById('submit-button').textContent = 'VOTE SUBMITTED';
-            document.querySelectorAll('.candidate-card').forEach(card => card.classList.add('opacity-70', 'pointer-events-none'));
         }
-
-        // Initial setup
-        window.onload = () => {
-            renderBallot();
-            checkSubmissionStatus(); // Check on load (it will be disabled initially)
-        };
     </script>
 </body>
 </html>
