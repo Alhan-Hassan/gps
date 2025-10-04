@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Leadership Election Ballot</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a cleaner interface */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f9; /* Light background */
+        }
+        .candidate-card {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: 2px solid transparent;
+            min-height: 120px;
+        }
+        /* Style for the selected card */
+        .candidate-card.selected {
+            border-color: #2563eb; /* Blue border */
+            background-color: #eff6ff; /* Light blue background */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+        /* Hide the default radio button visually */
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-10 p-6 bg-white rounded-xl shadow-lg">
+            <h1 class="text-4xl font-extrabold text-gray-800 tracking-tight">Official Leadership Ballot</h1>
+            <p class="text-lg text-gray-500 mt-2">Select one candidate for each of the 12 positions below.</p>
+        </header>
+
+        <!-- Ballot Container -->
+        <main id="ballot-container" class="space-y-8">
+            <!-- Positions will be rendered here by JavaScript -->
+        </main>
+
+        <!-- Submission Section -->
+        <div class="mt-12 p-6 bg-white rounded-xl shadow-lg border-t-4 border-blue-500">
+            <div id="status-message" class="text-center mb-4 text-lg text-red-600 font-semibold hidden">
+                Please select a candidate for all 12 positions before submitting.
+            </div>
+            <button id="submit-button" onclick="castVote()"
+                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-indigo-700 transition duration-150 ease-in-out disabled:opacity-50"
+                disabled>
+                Cast My Vote
+            </button>
+
+            <!-- Custom Alert/Confirmation Modal -->
+            <div id="confirmation-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50">
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-2xl max-w-sm w-full text-center transform scale-95 transition-transform duration-300">
+                    <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Vote Cast Successfully!</h3>
+                    <p class="text-gray-600 mb-6">Your selections have been recorded in the database. Thank you for participating.</p>
+                    <button onclick="document.getElementById('confirmation-modal').classList.add('hidden')"
+                        class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase Imports
+        import { initializeApp, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        let db;
+        let auth;
+        let userId = 'anonymous'; // Default, updated after sign-in
+
+        // Data structure for the election: 12 positions, 3 candidates each.
+        const ELECTION_DATA = [
+            { position: "President", candidates: ["Alice Chen", "Ben Carter", "Zara Khan"] },
+            { position: "Vice President", candidates: ["Elias Varkis", "Layla Stone", "Marcus Reed"] },
+            { position: "Secretary General", candidates: ["Hannah Miller", "Omar Hassan", "Vivian Lee"] },
+            { position: "Treasurer", candidates: ["Sam Jackson", "Nicole Davis", "Kyle Wong"] },
+            { position: "Public Relations Officer", candidates: ["Jasmine Lopez", "David Kim", "Ryan Patel"] },
+            { position: "Events Coordinator", candidates: ["Mia Rodriguez", "Alex Green", "Chloe Foster"] },
+            { position: "Academic Affairs Rep", candidates: ["Victor Cruz", "Serena Williams", "Leo Finch"] },
+            { position: "Student Welfare Officer", candidates: ["Grace Hall", "Ivan Petrov", "Amy Zhao"] },
+            { position: "Sports Minister", candidates: ["Tariq Jamal", "Brooke Adams", "Joel Rivera"] },
+            { position: "Sustainability Director", candidates: ["Olivia Scott", "Evan Baker", "Pamela Young"] },
+            { position: "IT & Tech Lead", candidates: ["Kenji Tanaka", "Laura Bell", "Chris Allen"] },
+            { position: "Freshman Representative", candidates: ["Noah King", "Emily Chen", "Daniel Perez"] }
+        ];
+
+        // State to track the user's current selections
+        let currentVotes = {};
+
+        // 1. Initialize Firebase, Auth, and Firestore
+        async function initFirebase() {
+            if (!firebaseConfig) {
+                console.error("Firebase configuration not found. Skipping database initialization.");
+                return;
+            }
+
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // setLogLevel is now correctly imported from the app module
+                setLogLevel('Debug'); // Enable Firestore logging 
+
+                // Authenticate user
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Get the user ID
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                console.log("Firebase initialized successfully. User ID:", userId);
+
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+                document.getElementById('status-message').textContent = 'Error: Database connection failed.';
+                document.getElementById('status-message').classList.remove('hidden');
+            }
+        }
+
+
+        // Helper function to create candidate cards (unchanged)
+        function createCandidateCard(positionIndex, candidateName, candidateIndex) {
+            const positionId = ELECTION_DATA[positionIndex].position.replace(/\s/g, '-');
+            const candidateId = `${positionId}-${candidateIndex}`;
+
+            // Color mapping for placeholder images based on candidate index (0, 1, or 2)
+            const colors = ["6366f1", "f97316", "10b981"]; // Indigo, Orange, Emerald
+            const initials = candidateName.split(' ').map(n => n[0]).join('');
+            const color = colors[candidateIndex % colors.length]; // Cycle through colors
+            const imageUrl = `https://placehold.co/40x40/${color}/white?text=${initials}`;
+
+            // Create the main label container (which acts as the clickable card)
+            const label = document.createElement('label');
+            label.className = "candidate-card flex items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md border-2 border-transparent transition cursor-pointer";
+            label.htmlFor = candidateId;
+            label.onclick = () => selectCandidate(positionId, candidateName, label);
+
+            // Hidden radio input
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = positionId; // Grouped by position
+            input.id = candidateId;
+            input.value = candidateName;
+            
+            // Profile Image Element
+            const profileImage = document.createElement('img');
+            profileImage.className = 'w-10 h-10 rounded-full object-cover mr-4 shrink-0 border-2 border-white shadow-sm';
+            profileImage.src = imageUrl;
+            profileImage.alt = `Profile picture for ${candidateName}`;
+
+            const nameText = document.createElement('span');
+            nameText.className = 'text-gray-800 font-semibold truncate';
+            nameText.textContent = candidateName;
+
+            // Checkmark icon (for selected state)
+            const checkIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            checkIcon.setAttribute('class', 'w-6 h-6 ml-auto text-blue-500 hidden selection-indicator');
+            checkIcon.setAttribute('fill', 'none');
+            checkIcon.setAttribute('stroke', 'currentColor');
+            checkIcon.setAttribute('viewBox', '0 0 24 24');
+            checkIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>';
+
+
+            label.appendChild(input);
+            label.appendChild(profileImage); // Insert the profile picture
+            label.appendChild(nameText);
+            label.appendChild(checkIcon);
+
+            return label;
+        }
+
+        // Handles candidate selection and updates the UI/state (unchanged)
+        function selectCandidate(positionId, candidateName, selectedCard) {
+            currentVotes[positionId] = candidateName;
+
+            // Deselect all cards for this position
+            const container = selectedCard.closest('.position-group');
+            if (container) {
+                container.querySelectorAll('.candidate-card').forEach(card => {
+                    card.classList.remove('selected');
+                    card.querySelector('.selection-indicator').classList.add('hidden');
+                });
+            }
+
+            // Select the clicked card
+            selectedCard.classList.add('selected');
+            selectedCard.querySelector('.selection-indicator').classList.remove('hidden');
+
+            checkSubmissionStatus();
+        }
+
+        // Checks if all positions have a vote and enables/disables the submit button (unchanged)
+        function checkSubmissionStatus() {
+            const numPositions = ELECTION_DATA.length;
+            const numVotes = Object.keys(currentVotes).length;
+            const submitButton = document.getElementById('submit-button');
+
+            if (numVotes === numPositions) {
+                submitButton.disabled = false;
+                document.getElementById('status-message').classList.add('hidden');
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+
+        // Renders the entire ballot page (unchanged)
+        function renderBallot() {
+            const ballotContainer = document.getElementById('ballot-container');
+            ELECTION_DATA.forEach((data, pIndex) => {
+                const positionId = data.position.replace(/\s/g, '-');
+
+                // Position Section Container
+                const section = document.createElement('section');
+                section.className = 'position-group bg-white p-5 rounded-xl shadow-md';
+                section.id = `group-${positionId}`;
+
+                // Position Title
+                const title = document.createElement('h2');
+                title.className = 'text-2xl font-bold text-gray-700 mb-4 border-b pb-2 border-indigo-100';
+                title.textContent = data.position;
+
+                // Candidates Grid
+                const candidatesGrid = document.createElement('div');
+                candidatesGrid.className = 'grid grid-cols-1 md:grid-cols-3 gap-4';
+
+                data.candidates.forEach((candidate, cIndex) => {
+                    const card = createCandidateCard(pIndex, candidate, cIndex);
+                    candidatesGrid.appendChild(card);
+                });
+
+                section.appendChild(title);
+                section.appendChild(candidatesGrid);
+                ballotContainer.appendChild(section);
+            });
+        }
+
+        // 2. Function called when the user clicks 'Cast My Vote' - NOW WITH FIREBASE
+        window.castVote = async function() {
+            const numPositions = ELECTION_DATA.length;
+            const numVotes = Object.keys(currentVotes).length;
+            const statusMessage = document.getElementById('status-message');
+            const submitButton = document.getElementById('submit-button');
+
+            if (numVotes < numPositions) {
+                statusMessage.textContent = 'Please select a candidate for all 12 positions before submitting.';
+                statusMessage.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            statusMessage.classList.add('hidden'); // Hide previous errors
+
+            if (!db) {
+                statusMessage.textContent = 'Error: Database connection failed. Cannot cast vote.';
+                statusMessage.classList.remove('hidden');
+                submitButton.textContent = 'Cast My Vote';
+                submitButton.disabled = false;
+                return;
+            }
+
+            try {
+                // Prepare the submission document
+                const voteSubmission = {
+                    userId: userId, // Record who submitted the vote
+                    timestamp: new Date(),
+                    ...currentVotes // Spreads the 12 position votes (e.g., {President: "Alice Chen", ...})
+                };
+
+                // Store the vote in a public collection for easy aggregation later
+                // Path: /artifacts/{appId}/public/data/election_votes
+                const collectionRef = collection(db, 'artifacts', appId, 'public', 'data', 'election_votes');
+                
+                await addDoc(collectionRef, voteSubmission);
+
+                console.log("Vote successfully cast and saved to Firestore. Document content:", voteSubmission);
+
+                // On success: Show confirmation modal
+                document.getElementById('confirmation-modal').classList.remove('hidden');
+
+                // Final UI state
+                submitButton.textContent = 'VOTE SUBMITTED';
+                // Visually disable the entire form after successful submission
+                document.querySelectorAll('.candidate-card').forEach(card => card.classList.add('opacity-70', 'pointer-events-none'));
+                
+                // Note: The total vote count would be calculated by querying and aggregating 
+                // the documents in the 'election_votes' collection.
+                
+            } catch (error) {
+                console.error("Error casting vote:", error);
+                // Handle error state
+                statusMessage.textContent = `Error: Failed to cast vote (${error.message}). Please try again.`;
+                statusMessage.classList.remove('hidden');
+                submitButton.textContent = 'Cast My Vote';
+                submitButton.disabled = false;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Initial setup
+        window.onload = async () => {
+            await initFirebase();
+            renderBallot();
+            checkSubmissionStatus(); // Check on load (it will be disabled initially)
+        };
+    </script>
+</body>
+</html>
