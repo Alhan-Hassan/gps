@@ -279,12 +279,12 @@
             transform: scale(1.05);
         }
 
-        #verse-search-btn, #share-to-chat {
+        #verse-search-btn, #resources-btn {
             position: relative;
             overflow: hidden;
         }
 
-        #verse-search-btn:disabled, #share-to-chat:disabled {
+        #verse-search-btn:disabled, #resources-btn:disabled {
             background: #6b7280;
             cursor: not-allowed;
             opacity: 0.7;
@@ -309,7 +309,7 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        #verse-search-btn:hover:not(:disabled), #share-to-chat:hover:not(:disabled) {
+        #verse-search-btn:hover:not(:disabled), #resources-btn:hover:not(:disabled) {
             background: #c0392b;
             transform: scale(1.05);
         }
@@ -510,7 +510,6 @@
             <li><a id="visit-btn" href="#" role="button" aria-label="Open Account Popup">Account</a></li>
             <li><a id="contact-btn" href="#" role="button" aria-label="Open Contact Popup">Contact</a></li>
             <li><a href="bible.html" class="bg-indigo-600">Read Bible</a></li>
-            <li><a href="resources.html">Resources</a></li>
         </ul>
     </nav>
 
@@ -648,6 +647,13 @@
             </div>
         </div>
     </main>
+    
+    <!-- Resources Button Section -->
+    <section class="container mx-auto px-4 py-8 text-center">
+        <a href="resources.html" id="resources-btn" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300" aria-label="Navigate to Resources page">
+            Resources
+        </a>
+    </section>
 
     <hr class="section-divider">
     <!-- Media Section -->
@@ -659,6 +665,7 @@
         <a href="#" title="Twitter" aria-label="Follow on Twitter"><i class="fab fa-twitter"></i></a>
     </div>
 
+   
     <!-- Footer -->
     <footer>
         &copy; 2025 God's Prayer Squad. All rights reserved<br>
