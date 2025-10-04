@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPS Family: Associates & Memorial</title>
+  <style>
+    /* Simulated pre-built Tailwind CSS subset with tech enhancements */
+    :root {
+      --primary-color: #1e3a8a;
+      --secondary-color: #10b981;
+      --bg-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      --card-bg: rgba(255, 255, 255, 0.1);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+    }
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .p-6 { padding: 1.5rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slideshow img.active {
+      opacity: 1;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+      z-index: 0;
+    }
+    .hero-content {
+      z-index: 1;
+    }
+    .hero h1 { font-size: 4rem; font-weight: bold; margin: 0; text-shadow: 0 0 20px var(--secondary-color); animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow { from { text-shadow: 0 0 20px var(--secondary-color); } to { text-shadow: 0 0 30px var(--secondary-color), 0 0 40px var(--secondary-color); } }
+    .hero p { font-size: 1.5rem; margin: 1rem 0; opacity: 0.9; }
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      background: rgba(0,0,0,0.3);
+      padding: 1rem 0;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1;
+    }
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 24s linear infinite;
+    }
+    .marquee-content span {
+      font-size: 1.2rem;
+      margin: 0 2rem;
+      color: var(--secondary-color);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      40% { transform: translateX(-50%); } /* Move halfway in 8s */
+      50% { transform: translateX(-50%); } /* Pause for 2s */
+      90% { transform: translateX(-100%); } /* Move rest of the way in 8s */
+      100% { transform: translateX(-100%); } /* Pause for 2s */
+    }
+    .section { padding: 4rem 0; }
+    .section-title { font-size: 3rem; text-align: center; margin-bottom: 3rem; position: relative; }
+    .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 100px; height: 3px; background: var(--secondary-color); }
+    .associates-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .associate-card { background: var(--card-bg); border-radius: 15px; padding: 2rem; text-align: center; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden; }
+    .associate-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, rgba(16,185,129,0.1), transparent); transform: rotate(0deg); transition: transform 0.5s; }
+    .associate-card:hover::before { transform: rotate(180deg); }
+    .associate-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .associate-card img { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 1rem; border: 3px solid var(--secondary-color); }
+    .associate-card h3 { font-size: 1.5rem; margin: 0.5rem 0; }
+    .associate-card p { opacity: 0.8; }
+    .memorial-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 4rem 0; border-radius: 20px; margin: 2rem 0; }
+    .memorial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+    .memorial-card { background: rgba(0,0,0,0.3); border-radius: 10px; padding: 1.5rem; text-align: center; border-left: 4px solid var(--secondary-color); animation: slideIn 0.5s ease forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    .memorial-card h4 { color: var(--secondary-color); margin-bottom: 0.5rem; }
+    .particle-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -2; }
+    .particle { position: absolute; background: var(--secondary-color); border-radius: 50%; opacity: 0.6; animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
+    .tech-footer { text-align: center; padding: 2rem; background: rgba(0,0,0,0.2); margin-top: 4rem; }
+  </style>
+</head>
+<body>
+  <div class="particle-bg" id="particles"></div>
+  <section class="hero">
+    <div class="slideshow">
+      <img src="https://images.unsplash.com/photo-1507908708918-7785872d4240?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Prayer Gathering 1">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Prayer Gathering 2">
+      <img src="https://images.unsplash.com/photo-1520829046730-4c2c92ac6d6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Prayer Gathering 3">
+    </div>
+    <div class="hero-content">
+      <h1>God's Prayer Squad Family</h1>
+      <p>Honoring Our Associates & Legacy</p>
+      <div class="marquee">
+        <div class="marquee-content">
+          <span>Pastor John Mupako</span>
+          <span>Sister Sarah Chikomo</span>
+          <span>Elder Michael Tafira</span>
+          <span>Deaconess Esther Moyo</span>
+          <span>Pastor John Mupako</span>
+          <span>Sister Sarah Chikomo</span>
+          <span>Elder Michael Tafira</span>
+          <span>Deaconess Esther Moyo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="section">
+      <h2 class="section-title">Key Associates & Leaders</h2>
+      <div class="associates-grid">
+        <div class="associate-card">
+          <img src="https://via.placeholder.com/100?text=Leader+1" alt="Leader 1">
+          <h3>Pastor John Mupako</h3>
+          <p>Founding Visionary | Guided GPS through its early years with unwavering faith.</p>
+        </div>
+        <div class="associate-card">
+          <img src="https://via.placeholder.com/100?text=Leader+2" alt="Leader 2">
+          <h3>Sister Sarah Chikomo</h3>
+          <p>Prayer Coordinator | Organized transformative community events.</p>
+        </div>
+        <div class="associate-card">
+          <img src="https://via.placeholder.com/100?text=Leader+3" alt="Leader 3">
+          <h3>Elder Michael Tafira</h3>
+          <p>Outreach Director | Expanded GPS's reach across districts.</p>
+        </div>
+        <div class="associate-card">
+          <img src="https://via.placeholder.com/100?text=Leader+4" alt="Leader 4">
+          <h3>Deaconess Esther Moyo</h3>
+          <p>Youth Mentor | Inspired the next generation in spiritual growth.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="memorial-section">
+      <div class="container">
+        <h2 class="section-title" style="color: var(--text-primary);">In Loving Memory</h2>
+        <div class="memorial-grid">
+          <div class="memorial-card">
+            <h4>John Mupako</h4>
+            <p>Passed: 2022 | Eternal prayers continue.</p>
+          </div>
+          <div class="memorial-card">
+            <h4>Sarah Chikomo</h4>
+            <p>Passed: 2023 | Legacy of compassion lives on.</p>
+          </div>
+          <div class="memorial-card">
+            <h4>Michael Tafira</h4>
+            <p>Passed: 2021 | Visionary spirit endures.</p>
+          </div>
+          <div class="memorial-card">
+            <h4>Esther Moyo</h4>
+            <p>Passed: 2024 | Guiding light forever.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="tech-footer">
+    <p>&copy; 2025 God's Prayer Squad. Powered by Faith & Technology.</p>
+  </footer>
+
+  <script>
+    // Particle background for tech feel
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.width = Math.random() * 3 + 1 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Slideshow functionality
+    function startSlideshow() {
+      const slides = document.querySelectorAll('.slideshow img');
+      let currentSlide = 0;
+
+      function showNextSlide() {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[currentSlide].classList.add('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+      }
+
+      showNextSlide(); // Show first slide
+      setInterval(showNextSlide, 5000); // Change every 5 seconds
+    }
+
+    // Animate cards
+    function animateCards() {
+      const cards = document.querySelectorAll('.associate-card, .memorial-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = index * 0.2 + 's';
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      startSlideshow();
+      animateCards();
+    });
+
+    // Smooth scroll for tech navigation if added
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
